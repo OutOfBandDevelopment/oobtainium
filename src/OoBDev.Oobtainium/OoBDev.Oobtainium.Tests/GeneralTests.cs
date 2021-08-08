@@ -134,31 +134,42 @@ namespace OoBDev.Oobtainium.Tests
         {
             var factory = new CaptureProxyFactory();
 
-
             //create instance with handler 
             var instance = factory.Create<ITargetInterface>();
 
             // not bound
-            Assert.IsNull(instance.ReturnValue());
 
-
+            var builder = ((IHaveCallBindingStore)instance).Store.Register<ITargetInterface>();
 
             //test function
-            var result = instance.ReturnValue();
+            Assert.IsNull(instance.ReturnValue());
 
-            //assert
-            Assert.AreEqual("Hello World", result);
+            builder.Bind(a => a.ReturnValue(), () => "Hello World");
+            Assert.AreEqual("Hello World", instance.ReturnValue());
+
+            builder.Bind(a => a.ReturnValue(), () => "Hello World!");
+            Assert.AreEqual("Hello World!", instance.ReturnValue());
+
+            builder.Remove(a => a.ReturnValue());
+            Assert.IsNull(instance.ReturnValue());
 
             //get recording from proxy instance
             var recorder = ((IHaveCallRecorder)instance).Recorder;
             foreach (var recoding in recorder)
                 this.TestContext.WriteLine(recoding?.ToString());
+
+            /*
+            ﻿ OnAgainOffAgainTest
+               Source: GeneralTests.cs line 133
+               Duration: 37 ms
+
+              Standard Output: 
+                TestContext Messages:
+                OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String ReturnValue()  
+                OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String ReturnValue()  => Hello World
+                OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String ReturnValue()  => Hello World!
+                OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String ReturnValue()
+            */
         }
     }
 }
-
-            ////mock out method response
-            //var bindings = new CallBinder()
-            //    .Register<ITargetInterface>()
-            //        .Bind(a => a.ReturnValue(), () => "Hello World")
-            //        ;

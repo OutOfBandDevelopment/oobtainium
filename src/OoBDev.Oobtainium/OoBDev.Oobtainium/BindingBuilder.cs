@@ -8,6 +8,23 @@ namespace OoBDev.Oobtainium
     public static class BindingBuilderExtensions
     {
         public static IBindingBuilder<S> Bind<S>(this IBindingBuilder<S> builder, Expression<Action<S>> action, Action callback) => builder.Bind(action.AsMethodInfo(), callback);
+        public static IBindingBuilder<S> Bind<S>(this IBindingBuilder<S> builder, Expression<Action<S>> action, Action<object[]> callback) => builder.Bind(action.AsMethodInfo(), callback);
+        //public static IBindingBuilder<S> Bind<S>(this IBindingBuilder<S> builder, Expression<Action<S>> action) => builder.Bind(action.AsMethodInfo(), callback);
+        //public static IBindingBuilder<S> Bind<S>(this IBindingBuilder<S> builder, Expression<Func<S, Task>> action) => builder.Bind(action.AsMethodInfo(), callback);
+        public static IBindingBuilder<S> Bind<S, R>(this IBindingBuilder<S> builder, Expression<Func<S, R>> action, Func<object[], R>? callback) => builder.Bind(action.AsMethodInfo(), callback);
+        public static IBindingBuilder<S> Bind<S, R>(this IBindingBuilder<S> builder, Expression<Func<S, Task<R>>> action, Func<object[], R>? callback) => builder.Bind(action.AsMethodInfo(), callback);
+        public static IBindingBuilder<S> Bind<S, R>(this IBindingBuilder<S> builder, Expression<Func<S, R>> action, Func<R>? callback) => builder.Bind(action.AsMethodInfo(), callback);
+        public static IBindingBuilder<S> Bind<S, R>(this IBindingBuilder<S> builder, Expression<Func<S, Task<R>>> action, Func<R>? callback) => builder.Bind(action.AsMethodInfo(), callback);
+        public static IBindingBuilder<S> Bind<S>(this IBindingBuilder<S> builder, Expression<Action<S>> action, Func<Task> callback) => builder.Bind(action.AsMethodInfo(), callback);
+        public static IBindingBuilder<S> Bind<S>(this IBindingBuilder<S> builder, Expression<Action<S>> action, Func<object[], Task> callback) => builder.Bind(action.AsMethodInfo(), callback);
+
+        public static IBindingBuilder<S> Remove<S>(this IBindingBuilder<S> builder, Expression<Action<S>> action)
+        {
+            builder.Store.Remove(typeof(S), action.AsMethodInfo());
+            return builder;
+        }
+
+        //public static IBindingBuilder<S> Bind<S>(this IBindingBuilder<S> builder, Expression<Action<S>> action, Action callback) => builder.Bind(action.AsMethodInfo(), callback);
         //public static IBindingBuilder<S> Bind<S, R>(this IBindingBuilder<S> builder, Expression<Action<S>> action, Func<R> callback) => builder.Bind(action.AsMethodInfo(), callback);
         //public static IBindingBuilder<S> Bind<S>(this IBindingBuilder<S> builder, Expression<Action<S>> action, Func<Task> callback) => builder.Bind(action.AsMethodInfo(), callback);
         //public static IBindingBuilder<S> Bind<S, R>(this IBindingBuilder<S> builder, Expression<Action<S>> action, Func<Task<R>> callback) => builder.Bind(action.AsMethodInfo(), callback);
