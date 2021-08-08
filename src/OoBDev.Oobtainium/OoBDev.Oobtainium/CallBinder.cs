@@ -1,12 +1,11 @@
 ﻿namespace OoBDev.Oobtainium
 {
-    public class CallBinder : ICallBinder, IToHandler
+    public class CallBinder : ICallBinder, IHaveCallBindingStore
     {
-        private readonly ICallBindingStore _store;
-        public CallBinder(ICallBindingStore? store = null) => _store = store ?? new CallBindingStore();
+        public ICallBindingStore Store { get; }
 
-        public IBindingBuilder<T> Register<T>() => new BindingBuilder<T>(_store);
+        public CallBinder(ICallBindingStore? store = null) => Store = store ?? new CallBindingStore();
 
-        public ICallHandler ToHandler() => new CallHandler(_store);
+        public IBindingBuilder<T> Register<T>() => new BindingBuilder<T>(Store);
     }
 }

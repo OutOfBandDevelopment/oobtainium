@@ -6,14 +6,14 @@ namespace OoBDev.Oobtainium
 {
     public class CallHandler : ICallHandler
     {
-        private readonly ICallBindingStore _store;
+        public ICallBindingStore Store { get; }
 
-        public CallHandler(ICallBindingStore store) => _store = store;
+        public CallHandler(ICallBindingStore? store = null) => Store = store ?? new CallBindingStore();
 
         private object? Invocation(Type? type, MethodInfo? method, object[]? arguments)
         {
             if (method == null) return null;
-            var @delegate = _store[type, method];
+            var @delegate = Store[type, method];
             if (@delegate == null) return null;
 
             var parameters = @delegate.Method.GetParameters();
@@ -30,7 +30,7 @@ namespace OoBDev.Oobtainium
             return method.ReturnType.ConvertOrDefault(result);
         }
 
-        private object?[] BuildDelegateArguments(ParameterInfo[] parameters, object?[]? arguments)
+        private static object?[] BuildDelegateArguments(ParameterInfo[] parameters, object?[]? arguments)
         {
             var args = new object?[parameters.Length];
             var argLength = arguments?.Length ?? 0;

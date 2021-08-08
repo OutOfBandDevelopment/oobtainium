@@ -14,8 +14,4 @@ namespace OoBDev.Oobtainium
 
         void Clear();
     }
-    public interface IHaveCallRecorder
-    {
-        ICallRecorder Recorder { get; }
-    }
 }

@@ -6,18 +6,21 @@ using System.Threading.Tasks;
 
 namespace OoBDev.Oobtainium
 {
-    public class CaptureProxy<I> : DispatchProxy, IHaveCallRecorder
+    public class CaptureProxy<I> : DispatchProxy, IHaveCallRecorder, IHaveCallHandler, IHaveCallBindingStore
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         private ICallRecorder _capture;
+        private ICallHandler _handler;
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        ICallRecorder IHaveCallRecorder.Recorder => _capture;
 
-        private ICallHandler? _handler;
+        ICallRecorder IHaveCallRecorder.Recorder => _capture;
+        ICallHandler IHaveCallHandler.Handler => _handler;
+        ICallBindingStore IHaveCallBindingStore.Store => _handler.Store;
+
         private ILogger<I>? _logger;
 
+        //TODO: this backing store should move the CallBindingStore
         private readonly ConcurrentDictionary<string, object?> _backingStore = new ConcurrentDictionary<string, object?>();
-
 
         protected override object? Invoke(MethodInfo targetMethod, object[] args)
         {
@@ -144,7 +147,7 @@ namespace OoBDev.Oobtainium
         }
 
         internal static I Create(
-            ICallHandler? intermediate = null,
+            ICallHandler? handler = null,
             ICallRecorder? capture = null,
             ILogger<I>? logger = null
             )
@@ -153,9 +156,9 @@ namespace OoBDev.Oobtainium
             if (proxy != null)
             {
                 var unwrapped = (CaptureProxy<I>)proxy;
-                unwrapped._capture = capture ?? new CallRecorder(null);
+                unwrapped._capture = capture ?? new CallRecorder();
+                unwrapped._handler = handler ?? new CallHandler();
                 unwrapped._logger = logger;
-                unwrapped._handler = intermediate;
             }
 #pragma warning disable CS8603 // Possible null reference return.
             return (I)proxy;

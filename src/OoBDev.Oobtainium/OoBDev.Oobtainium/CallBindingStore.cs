@@ -2,27 +2,32 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 
 namespace OoBDev.Oobtainium
 {
-    public class CallBindingStore : ICallBindingStore, IToHandler
+    public static class CallBindingStoreExtensions
+    {
+        public static ICallBinder ToCallbinder(this ICallBindingStore store) => new CallBinder(store);
+        public static IBindingBuilder<T> Register<T>(this ICallBindingStore store) => store.ToCallbinder().Register<T>();
+        public static IBindingBuilder<T> Register<T>(this IHaveCallBindingStore have) => have.Store.Register<T>();
+
+        //public static void Add(this ICallBindingStore store, Expression action) => store.Add(null, action.AsMethodInfo(), null);
+        //public static void Add<T>(this ICallBindingStore store, Expression action) => store.Add(typeof(T), action.AsMethodInfo(), null);
+        //public static void Add(this ICallBindingStore store, Type type, Expression action) => store.Add(type, action.AsMethodInfo(), null);
+        //public static void Add(this ICallBindingStore store, Expression action, Delegate? callback) => store.Add(null, action.AsMethodInfo(), callback);
+        //public static void Add<T>(this ICallBindingStore store, Expression action, Delegate? callback) => store.Add(typeof(T), action.AsMethodInfo(), callback);
+        //public static void Add(this ICallBindingStore store, Type type, Expression action, Delegate? callback) => store.Add(type, action.AsMethodInfo(), callback);
+        //public static void Add(this ICallBindingStore store, MethodInfo method) => store.Add(null, method, null);
+        //public static void Add<T>(this ICallBindingStore store, MethodInfo method) => store.Add(typeof(T), method, null);
+        //public static void Add(this ICallBindingStore store, Type type, MethodInfo method) => store.Add(type, method, null);
+        //public static void Add(this ICallBindingStore store, MethodInfo method, Delegate? callback) => store.Add(null, method, callback);
+        //public static void Add<T>(this ICallBindingStore store, MethodInfo method, Delegate? callback) => store.Add(typeof(T), method, callback);
+        //public static void Add(this ICallBindingStore store, Type type, MethodInfo method, Delegate? callback) => store.Add(type, method, callback);
+    }
+    public class CallBindingStore : ICallBindingStore
     {
         private readonly ConcurrentDictionary<(Type? type, MethodInfo method), Delegate> _store = new ConcurrentDictionary<(Type?, MethodInfo), Delegate>();
-
-        //TODO: are these needed?  they can't do anything anyway
-        public void Add(Expression action) => Add(action, null);
-        public void Add<T>(Expression action) => Add<T>(action, null);
-        public void Add(Type? type, Expression action) => Add(type, action, null);
-        public void Add(Type? type, MethodInfo method) => Add(type, method, null);
-        public void Add(MethodInfo method) => Add(null, method, null);
-
-        public void Add<T>(Expression action, Delegate? callback) => Add(typeof(T), action, callback);
-        public void Add(Expression action, Delegate? callback) => Add(null, action, callback);
-
-        public void Add(Type? type, Expression action, Delegate? callback) => Add(type, action.AsMethodInfo(), callback);
-        public void Add(MethodInfo method, Delegate? callback) => Add(method?.DeclaringType, method, callback);
 
         public void Add(Type? type, MethodInfo? method, Delegate? callback)
         {
@@ -30,12 +35,9 @@ namespace OoBDev.Oobtainium
             _store.AddOrUpdate((type ?? method.DeclaringType, method), key => callback, (key, old) => callback);
         }
 
-        public void Remove(Expression? action) => Remove(action?.AsMethodInfo());
-        public void Remove(Type? type, Expression? action) => Remove(type, action?.AsMethodInfo());
         public void Remove(MethodInfo? method)
         {
             if (method == null) return;
-
             var selectedKeys = _store.Keys.Where(k => k.method == method).ToArray();
             foreach (var key in selectedKeys)
                 _store.TryRemove(key, out _);
@@ -43,7 +45,6 @@ namespace OoBDev.Oobtainium
         public void Remove(Type? type)
         {
             if (type == null) return;
-
             var selectedKeys = _store.Keys.Where(k => k.type == type).ToArray();
             foreach (var key in selectedKeys)
                 _store.TryRemove(key, out _);
@@ -51,10 +52,7 @@ namespace OoBDev.Oobtainium
         public void Remove(Type? type, MethodInfo? method)
         {
             if (method == null) return;
-
-            var selectedKeys = _store.Keys.Where(k => k.type == type && k.method == method).ToArray();
-            foreach (var key in selectedKeys)
-                _store.TryRemove(key, out _);
+            _store.TryRemove((type, method), out _);
         }
 
         public void Clear() => _store.Clear();
@@ -64,8 +62,6 @@ namespace OoBDev.Oobtainium
         public IReadOnlyList<(MethodInfo method, Delegate callback)> GetByType(Type? type) =>
             (type == null || type == typeof(void)) ? Array.Empty<(MethodInfo, Delegate)>() :
             _store.Where(i => i.Key.type == type).Select(i => (i.Key.method, i.Value)).ToArray();
-
-        public ICallHandler ToHandler() => new CallHandler(this);
 
         public Delegate? this[MethodInfo method] => this[null, method];
         public Delegate? this[Type? type, MethodInfo method] =>

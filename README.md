@@ -41,7 +41,7 @@ Simplified example
 
             Standard Output: 
             TestContext Messages:
-            OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::System.String ReturnValue()  => Hello World
+            OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String ReturnValue()  => Hello World
         */
     }
 ```
