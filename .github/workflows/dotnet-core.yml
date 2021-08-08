@@ -2,11 +2,11 @@ name: .NET Core
 
 on:
   push:
-    branches: [ master, 'dev/**' ]
-    #paths: ['src/**']    
+    branches: [ master, main, 'dev/**' ]
+    paths: ['src/**']    
   pull_request:
-    branches: [ master ]
-    #paths: ['src/**']   
+    branches: [ master, main ]
+    paths: ['src/**']   
     
   # support manual execution
   workflow_dispatch:
