@@ -21,12 +21,12 @@ namespace OoBDev.Oobtainium.Tests
                     )
 
                 //Setup container for oobtainium
-                .AddScoped<ICallRecorder, CallRecorder>()
-                .AddScoped<ICallBindingStore, CallBindingStore>()
-
-                .AddTransient<ICaptureProxyFactory, CaptureProxyFactory>()
-                .AddTransient<ICallBinder, CallBinder>()
-                .AddTransient<ICallHandler, CallHandler>()
+                .AddOobtainium()
+                //.AddScoped<ICallRecorder, CallRecorder>()
+                //.AddScoped<ICallBindingStore, CallBindingStore>()
+                //.AddTransient<ICaptureProxyFactory, CaptureProxyFactory>()
+                //.AddTransient<ICallBinder, CallBinder>()
+                //.AddTransient<ICallHandler, CallHandler>()
 
                 //setup mocked interface in IOC
                 .AddTransient(sp => sp.GetRequiredService<ICaptureProxyFactory>().Create<IAnotherInterface>())

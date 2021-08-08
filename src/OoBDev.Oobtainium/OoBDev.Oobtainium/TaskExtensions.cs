@@ -1,6 +1,5 @@
-﻿using System.Reflection;
-using System.Text.RegularExpressions;
-using System;
+﻿using System;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace OoBDev.Oobtainium

@@ -4,6 +4,12 @@
 
 Out-of-Band Development presents Oobtainium.  This is a simple mocking framework that allows for interception and call capture.
 
+## Examples 
+
+Enable 
+
+### 
+
 ## Build Status
 
 [![.NET Core](https://github.com/OutOfBandDevelopment/oobtainium/workflows/.NET%20Core/badge.svg)](https://github.com/OutOfBandDevelopment/oobtainium)

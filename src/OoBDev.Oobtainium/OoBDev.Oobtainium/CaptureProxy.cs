@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace OoBDev.Oobtainium
 {
-    public class CaptureProxy<I> : DispatchProxy
+    public class CaptureProxy<I> : DispatchProxy, IHaveCallRecorder
     {
-        private ICallRecorder? _capture;
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        private ICallRecorder _capture;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        ICallRecorder IHaveCallRecorder.Recorder => _capture;
+
         private ICallHandler? _handler;
         private ILogger<I>? _logger;
 
         private readonly ConcurrentDictionary<string, object?> _backingStore = new ConcurrentDictionary<string, object?>();
+
 
         protected override object? Invoke(MethodInfo targetMethod, object[] args)
         {
@@ -47,7 +52,7 @@ namespace OoBDev.Oobtainium
                 if (targetMethod.Name.StartsWith("set_"))
                 {
                     var key = targetMethod.Name[4..] + (args.Length > 1 ? '[' + string.Join(';', args[..^1]) + ']' : "");
-                    var value = args.Length == 0 ? args[0]: args[^1];
+                    var value = args.Length == 0 ? args[0] : args[^1];
 
                     //TODO: look at an indexer
                     _logger?.LogDebug($"{key} is acting like a setter");
@@ -138,14 +143,17 @@ namespace OoBDev.Oobtainium
             }
         }
 
-
-        internal static I Create(ICallHandler? intermediate = null, ICallRecorder? capture = null, ILogger<I>? logger = null)
+        internal static I Create(
+            ICallHandler? intermediate = null,
+            ICallRecorder? capture = null,
+            ILogger<I>? logger = null
+            )
         {
             object? proxy = Create<I, CaptureProxy<I>>();
             if (proxy != null)
             {
                 var unwrapped = (CaptureProxy<I>)proxy;
-                unwrapped._capture = capture;
+                unwrapped._capture = capture ?? new CallRecorder(null);
                 unwrapped._logger = logger;
                 unwrapped._handler = intermediate;
             }
@@ -154,5 +162,4 @@ namespace OoBDev.Oobtainium
 #pragma warning restore CS8603 // Possible null reference return.
         }
     }
-
 }

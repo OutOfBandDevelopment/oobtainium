@@ -19,6 +19,8 @@ namespace OoBDev.Oobtainium
 
         public CaptureHandler Capture { get; }
 
+        public void Clear() => _calls.Clear();
+
         public IEnumerator<IRecordedCall> GetEnumerator() => _calls.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _calls.GetEnumerator();
 
@@ -28,5 +30,4 @@ namespace OoBDev.Oobtainium
             _calls.Add(new RecordedCall(instanceAs, method, arguments, response));
         }
     }
-
 }

@@ -20,7 +20,16 @@ namespace OoBDev.Oobtainium
         IBindingBuilder<S> Bind<R>(Expression<Func<S, R>> action, Func<R>? callback);
         IBindingBuilder<S> Bind<R>(Expression<Func<S, Task<R>>> action, Func<R>? callback);
 
+        /// <summary>
+        /// Chain additional interface
+        /// </summary>
+        /// <typeparam name="U"></typeparam>
+        /// <returns></returns>
         IBindingBuilder<U> Register<U>();
+
+        /// <summary>
+        /// retrieve underlying binding store.
+        /// </summary>
         ICallBindingStore Store { get; }
     }
 }

@@ -10,8 +10,9 @@ namespace OoBDev.Oobtainium
 
         public CallHandler(ICallBindingStore store) => _store = store;
 
-        private object? Invocation(Type? type, MethodInfo method, object[]? arguments)
+        private object? Invocation(Type? type, MethodInfo? method, object[]? arguments)
         {
+            if (method == null) return null;
             var @delegate = _store[type, method];
             if (@delegate == null) return null;
 
@@ -29,13 +30,13 @@ namespace OoBDev.Oobtainium
             return method.ReturnType.ConvertOrDefault(result);
         }
 
-        private object?[] BuildDelegateArguments(ParameterInfo[] parameters, object[]? arguments)
+        private object?[] BuildDelegateArguments(ParameterInfo[] parameters, object?[]? arguments)
         {
             var args = new object?[parameters.Length];
             var argLength = arguments?.Length ?? 0;
             for (var index = 0; index < parameters.Length; index++)
             {
-                if (index < argLength && parameters[index].ParameterType.IsInstanceOfType(arguments[index]))
+                if (index < argLength && arguments?[index] != null && parameters[index].ParameterType.IsInstanceOfType(arguments[index]))
                 {
                     args[index] = arguments[index];
                 }
@@ -63,5 +64,4 @@ namespace OoBDev.Oobtainium
         public object? Invoke(Expression action, object[]? arguments) => Invocation(null, action.AsMethodInfo(), arguments);
         public object? Invoke<T>(Expression action, object[]? arguments) => Invocation(typeof(T), action.AsMethodInfo(), arguments);
     }
-
 }

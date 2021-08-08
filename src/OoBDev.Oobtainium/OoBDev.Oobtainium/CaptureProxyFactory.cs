@@ -10,9 +10,9 @@ namespace OoBDev.Oobtainium
 
         public T Create<T>(ICallRecorder? recorder = null, ICallHandler? handler = null, ILogger<T>? logger = null) =>
             CaptureProxy<T>.Create(
-                handler ?? _serviceProvider?.GetService(typeof(ICallHandler)) as ICallHandler
-,
-                recorder ?? _serviceProvider?.GetService(typeof(ICallRecorder)) as ICallRecorder,
+                handler ?? _serviceProvider?.GetService(typeof(ICallHandler)) as ICallHandler,
+                recorder ?? _serviceProvider?.GetService(typeof(ICallRecorder)) as ICallRecorder ??
+                    new CallRecorder(_serviceProvider?.GetService(typeof(ILogger<ICallRecorder>)) as ILogger<ICallRecorder>),
                 logger ?? _serviceProvider?.GetService(typeof(ILogger<T>)) as ILogger<T>);
     }
 }
