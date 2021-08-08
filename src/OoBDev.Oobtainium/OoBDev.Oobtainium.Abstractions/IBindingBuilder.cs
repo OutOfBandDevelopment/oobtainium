@@ -1,26 +1,17 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System.Reflection;
+using System;
 
 namespace OoBDev.Oobtainium
 {
-    public interface IBindingBuilder<S>
+    public interface IBindingBuilder<S> : IHaveCallBindingStore
     {
-        IBindingBuilder<S> Bind(Expression<Action<S>> action, Action callback);
-        IBindingBuilder<S> Bind(Expression<Action<S>> action, Action<object[]> callback);
+        IBindingBuilder<S> Bind(MethodInfo? method, Delegate? callback);
 
-        IBindingBuilder<S> Bind(Expression<Action<S>> action, Func<Task> callback);
-        IBindingBuilder<S> Bind(Expression<Action<S>> action, Func<object[], Task> callback);
-
-        IBindingBuilder<S> Bind(Expression<Action<S>> action);
-        IBindingBuilder<S> Bind(Expression<Func<S, Task>> action);
-
-        IBindingBuilder<S> Bind<R>(Expression<Func<S, R>> action, Func<object[], R>? callback);
-        IBindingBuilder<S> Bind<R>(Expression<Func<S, Task<R>>> action, Func<object[], R>? callback);
-        IBindingBuilder<S> Bind<R>(Expression<Func<S, R>> action, Func<R>? callback);
-        IBindingBuilder<S> Bind<R>(Expression<Func<S, Task<R>>> action, Func<R>? callback);
-
+        /// <summary>
+        /// Chain additional interface
+        /// </summary>
+        /// <typeparam name="U"></typeparam>
+        /// <returns></returns>
         IBindingBuilder<U> Register<U>();
-        ICallBindingStore Store { get; }
     }
 }

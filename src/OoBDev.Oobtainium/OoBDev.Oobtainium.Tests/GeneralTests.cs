@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OoBDev.Oobtainium.Tests.TestTargets;
 using System;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace OoBDev.Oobtainium.Tests
     {
         public TestContext TestContext { get; set; }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Unit")]
         public async Task GeneralTest()
         {
             var services = new ServiceCollection()
@@ -21,12 +22,12 @@ namespace OoBDev.Oobtainium.Tests
                     )
 
                 //Setup container for oobtainium
-                .AddScoped<ICallRecorder, CallRecorder>()
-                .AddScoped<ICallBindingStore, CallBindingStore>()
-
-                .AddTransient<ICaptureProxyFactory, CaptureProxyFactory>()
-                .AddTransient<ICallBinder, CallBinder>()
-                .AddTransient<ICallHandler, CallHandler>()
+                .AddOobtainium()
+                //.AddScoped<ICallRecorder, CallRecorder>()
+                //.AddScoped<ICallBindingStore, CallBindingStore>()
+                //.AddTransient<ICaptureProxyFactory, CaptureProxyFactory>()
+                //.AddTransient<ICallBinder, CallBinder>()
+                //.AddTransient<ICallHandler, CallHandler>()
 
                 //setup mocked interface in IOC
                 .AddTransient(sp => sp.GetRequiredService<ICaptureProxyFactory>().Create<IAnotherInterface>())
@@ -82,51 +83,93 @@ namespace OoBDev.Oobtainium.Tests
                 TestContext.WriteLine($"> {recoding}");
             }
             /*
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::System.String ReturnValue()  => 8894e4e2-6968-4924-b223-b239024846a0
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::Void VoidReturn()  
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::System.Threading.Tasks.Task VoidReturnAsync()  
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::Void set_Item(Int32, System.String) [456;Hi!] 
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::System.String get_Item(Int32) [456] => Hi!
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::Void set_Item(Int32, System.String) [456;xyz] 
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::System.String get_Item(Int32) [456] => xyz
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::System.Threading.Tasks.Task VoidReturnWithInputAsync(System.String) [HI!] 
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::System.Threading.Tasks.Task VoidReturnWithGenericInputAsync[Int32](Int32) [234] 
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::System.Threading.Tasks.Task`1[System.Object] InvokeAsync()  
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::System.Threading.Tasks.Task`1[System.String] InvokeAsync[String](System.String) [Hello!!] 
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::System.Threading.Tasks.Task`1[System.Int32] InvokeAsync[Int32](Int32) [345] 
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::System.Threading.Tasks.Task VoidReturnAsync()  
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::System.Threading.Tasks.Task`1[<>f__AnonymousType0`1[System.String]] InvokeAsync[<>f__AnonymousType0`1](<>f__AnonymousType0`1[System.String]) [{ Test = Hello }] => { Test = { Test = Hello } }
-                > OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::Void VoidReturnWithGenericInput[<>f__AnonymousType1`1](<>f__AnonymousType1`1[System.String]) [{ Other = hello }] 
-                > OoBDev.Oobtainium.Tests.GeneralTests+IAnotherInterface::Int32 DoWork(System.String) [hello world!] 
-                > OoBDev.Oobtainium.Tests.GeneralTests+IAnotherInterface::System.Threading.Tasks.Task`1[System.Int32] DoWork2(System.String) [hello world!]
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String ReturnValue()  => 295b1cf5-05b3-4e21-a27b-2fcb82d8ef74
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::Void VoidReturn()  
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.Threading.Tasks.Task VoidReturnAsync()  
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::Void set_Item(Int32, System.String) [456;Hi!] 
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String get_Item(Int32) [456] => Hi!
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::Void set_Item(Int32, System.String) [456;xyz] 
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String get_Item(Int32) [456] => xyz
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.Threading.Tasks.Task VoidReturnWithInputAsync(System.String) [HI!] 
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.Threading.Tasks.Task VoidReturnWithGenericInputAsync[Int32](Int32) [234] 
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.Threading.Tasks.Task`1[System.Object] InvokeAsync()  
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.Threading.Tasks.Task`1[System.String] InvokeAsync[String](System.String) [Hello!!] 
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.Threading.Tasks.Task`1[System.Int32] InvokeAsync[Int32](Int32) [345] 
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.Threading.Tasks.Task VoidReturnAsync()  
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.Threading.Tasks.Task`1[<>f__AnonymousType0`1[System.String]] InvokeAsync[<>f__AnonymousType0`1](<>f__AnonymousType0`1[System.String]) [{ Test = Hello }] => { Test = { Test = Hello } }
+                > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::Void VoidReturnWithGenericInput[<>f__AnonymousType1`1](<>f__AnonymousType1`1[System.String]) [{ Other = hello }] 
+                > OoBDev.Oobtainium.Tests.TestTargets.IAnotherInterface::Int32 DoWork(System.String) [hello world!] 
+                > OoBDev.Oobtainium.Tests.TestTargets.IAnotherInterface::System.Threading.Tasks.Task`1[System.Int32] DoWork2(System.String) [hello world!]
             */
         }
 
-        public interface ITargetInterface
+        [TestMethod, TestCategory("Unit")]
+        public void SimpleTest()
         {
-            string this[int index] { get; set; }
-            int Test { get; set; }
+            var factory = new CaptureProxyFactory();
 
-            string ReturnValue();
-            void VoidReturn();
-            void VoidReturnWithInput(object input);
-            void VoidReturnWithGenericInput<T>(T input);
-            T ReturnWithGenericInput<T>(T input);
-            Task VoidReturnAsync();
-            Task VoidReturnWithInputAsync(string input);
-            Task VoidReturnWithGenericInputAsync<T>(T input);
-            Task<object> InvokeAsync();
-            Task<T> InvokeAsync<T>();
-            Task<T> InvokeAsync<T>(T input);
-            Task<T> InvokeAsync<T>(string input);
+            //mock out method response
+            var bindings = new CallBinder()
+                .Register<ITargetInterface>()
+                    .Bind(a => a.ReturnValue(), () => "Hello World")
+                    ;
+
+            //create instance with handler 
+            var instance = factory.Create<ITargetInterface>(handler: new CallHandler(bindings.Store));
+
+            //test function
+            var result = instance.ReturnValue();
+
+            //assert
+            Assert.AreEqual("Hello World", result);
+
+            //get recording from proxy instance
+            var recorder = ((IHaveCallRecorder)instance).Recorder;
+            foreach (var recoding in recorder)
+                this.TestContext.WriteLine(recoding?.ToString());
         }
 
-        public interface IAnotherInterface
+        [TestMethod, TestCategory("Unit")]
+        public void OnAgainOffAgainTest()
         {
-            int DoWork(string abc);
+            var factory = new CaptureProxyFactory();
 
-            Task<int> DoWork2(string abc);
+            //create instance with handler 
+            var instance = factory.Create<ITargetInterface>();
+
+            // not bound
+
+            var builder = ((IHaveCallBindingStore)instance).Store.Register<ITargetInterface>();
+
+            //test function
+            Assert.IsNull(instance.ReturnValue());
+
+            builder.Bind(a => a.ReturnValue(), () => "Hello World");
+            Assert.AreEqual("Hello World", instance.ReturnValue());
+
+            builder.Bind(a => a.ReturnValue(), () => "Hello World!");
+            Assert.AreEqual("Hello World!", instance.ReturnValue());
+
+            builder.Remove(a => a.ReturnValue());
+            Assert.IsNull(instance.ReturnValue());
+
+            //get recording from proxy instance
+            var recorder = ((IHaveCallRecorder)instance).Recorder;
+            foreach (var recoding in recorder)
+                this.TestContext.WriteLine(recoding?.ToString());
+
+            /*
+            ﻿ OnAgainOffAgainTest
+               Source: GeneralTests.cs line 133
+               Duration: 37 ms
+
+              Standard Output: 
+                TestContext Messages:
+                OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String ReturnValue()  
+                OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String ReturnValue()  => Hello World
+                OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String ReturnValue()  => Hello World!
+                OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String ReturnValue()
+            */
         }
-
     }
 }

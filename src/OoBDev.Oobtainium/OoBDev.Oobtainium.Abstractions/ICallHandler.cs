@@ -4,7 +4,10 @@ using System.Reflection;
 
 namespace OoBDev.Oobtainium
 {
-    public interface ICallHandler
+    /// <summary>
+    /// Call handler allows for calling operations within the ICallBindingStore
+    /// </summary>
+    public interface ICallHandler : IHaveCallBindingStore
     {
         object? Invoke<T>(MethodInfo method, object[]? arguments);
         object? Invoke<T>(MethodInfo method);
@@ -19,5 +22,4 @@ namespace OoBDev.Oobtainium
         object? Invoke(Expression action, object[]? arguments);
         object? Invoke<T>(Expression action, object[]? arguments);
     }
-
 }

@@ -1,13 +1,12 @@
-﻿using System.Reflection;
-using System.Text.RegularExpressions;
-using System;
+﻿using System;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace OoBDev.Oobtainium
 {
     public static class TaskExtensions
     {
-        public static Task AsTask(this object input)
+        public static Task AsTask(this object? input)
         {
             if (input == null) return Task.CompletedTask;
             var task = typeof(Task)
