@@ -39,7 +39,7 @@ namespace OoBDev.Oobtainium.Tests
 
             // configure binding interceptions
             var binder = sp.GetRequiredService<ICallBinder>()
-                    .Register<ITargetInterface>()
+                    .Build<ITargetInterface>()
                         .Bind(a => a.VoidReturn(), () => TestContext.WriteLine("Do Work"))
                         .Bind(a => a.VoidReturnAsync(), async args =>
                         {
@@ -50,7 +50,7 @@ namespace OoBDev.Oobtainium.Tests
                         .Bind(a => a.InvokeAsync(new { Test = "" }), p => new { Test = p[0].ToString() ?? "" })
                         .Bind(a => a.VoidReturnWithGenericInput(new { Other = "" }), () => Task.FromResult(new { Other = "" }))
                         .Bind(a => a.ReturnValue(), () => Task.FromResult(Guid.NewGuid()))
-                    .Register<IAnotherInterface>()
+                    .Build<IAnotherInterface>()
                     ;
 
             //create proxy 
@@ -110,7 +110,7 @@ namespace OoBDev.Oobtainium.Tests
 
             //mock out method response
             var bindings = new CallBinder()
-                .Register<ITargetInterface>()
+                .Build<ITargetInterface>()
                     .Bind(a => a.ReturnValue(), () => "Hello World")
                     ;
 
@@ -139,7 +139,7 @@ namespace OoBDev.Oobtainium.Tests
 
             // not bound
 
-            var builder = ((IHaveCallBindingStore)instance).Store.Register<ITargetInterface>();
+            var builder = ((IHaveCallBindingStore)instance).Store.Build<ITargetInterface>();
 
             //test function
             Assert.IsNull(instance.ReturnValue());
