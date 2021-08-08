@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.1": {},
     ".NETStandard,Version=v2.1/": {
-      "OoBDev.Oobtainium/0.1.0-dev-AddBuildAutomation.12": {
+      "OoBDev.Oobtainium/0.1.0-rc.18": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "3.1.9",
           "OoBDev.Oobtainium.Abstractions": "1.0.0",
@@ -180,7 +180,7 @@
     }
   },
   "libraries": {
-    "OoBDev.Oobtainium/0.1.0-dev-AddBuildAutomation.12": {
+    "OoBDev.Oobtainium/0.1.0-rc.18": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
