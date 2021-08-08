@@ -10,12 +10,25 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OoBDev.Oobtainium.Tests", "OoBDev.Oobtainium.Tests\OoBDev.Oobtainium.Tests.csproj", "{266C5E50-975C-493E-B5B5-A0868046AF6A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{AE168545-B4B2-4C3B-B981-5D17B9BEFDEC}"
+	ProjectSection(SolutionItems) = preProject
+		.runsettings = .runsettings
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "parent", "parent", "{6727DC89-E340-4610-B4EE-3446461C616A}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\.gitignore = ..\..\.gitignore
+		..\..\GitVersion.yml = ..\..\GitVersion.yml
 		..\..\LICENSE = ..\..\LICENSE
 		..\..\README.md = ..\..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{24B5BD98-3BD2-41DE-A41D-E45FB59ECED4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{325FB05E-3E11-495C-A12B-926DA23583EF}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\.github\workflows\dotnet-core.yml = ..\..\.github\workflows\dotnet-core.yml
 	EndProjectSection
 EndProject
 Global
@@ -42,6 +55,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6727DC89-E340-4610-B4EE-3446461C616A} = {AE168545-B4B2-4C3B-B981-5D17B9BEFDEC}
+		{24B5BD98-3BD2-41DE-A41D-E45FB59ECED4} = {6727DC89-E340-4610-B4EE-3446461C616A}
+		{325FB05E-3E11-495C-A12B-926DA23583EF} = {24B5BD98-3BD2-41DE-A41D-E45FB59ECED4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8DE4B6AF-2D2C-4FF7-947D-2094D4EFA4FB}

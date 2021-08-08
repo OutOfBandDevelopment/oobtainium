@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <Copyright>Out-of-Band Development, LLC 2021</Copyright>
+    <Company>Out-of-Band Development, LLC</Company>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/OutOfBandDevelopment/oobtainium/</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <Authors>Matthew Whited</Authors>
+  </PropertyGroup>
+  
+</Project>
