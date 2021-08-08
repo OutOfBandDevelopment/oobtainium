@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace OoBDev.Oobtainium
 {
-    public interface IBindingBuilder<S>
+    public interface IBindingBuilder<S> : IToHandler
     {
         IBindingBuilder<S> Bind(Expression<Action<S>> action, Action callback);
         IBindingBuilder<S> Bind(Expression<Action<S>> action, Action<object[]> callback);

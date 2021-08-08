@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace OoBDev.Oobtainium
 {
-    public class CallBindingStore : ICallBindingStore
+    public class CallBindingStore : ICallBindingStore, IToHandler
     {
         private readonly ConcurrentDictionary<(Type? type, MethodInfo method), Delegate> _store = new ConcurrentDictionary<(Type?, MethodInfo), Delegate>();
 
@@ -64,6 +64,8 @@ namespace OoBDev.Oobtainium
         public IReadOnlyList<(MethodInfo method, Delegate callback)> GetByType(Type? type) =>
             (type == null || type == typeof(void)) ? Array.Empty<(MethodInfo, Delegate)>() :
             _store.Where(i => i.Key.type == type).Select(i => (i.Key.method, i.Value)).ToArray();
+
+        public ICallHandler ToHandler() => new CallHandler(this);
 
         public Delegate? this[MethodInfo method] => this[null, method];
         public Delegate? this[Type? type, MethodInfo method] =>

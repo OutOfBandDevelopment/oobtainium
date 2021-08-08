@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace OoBDev.Oobtainium
@@ -26,7 +27,7 @@ namespace OoBDev.Oobtainium
 
         private void RecordCall(object instance, Type instanceAs, MethodInfo method, object[] arguments, object? response)
         {
-            _log.LogInformation($"{instance} as {instanceAs}: {method.Name}({string.Join(';', arguments)}) => { response}");
+            _log?.LogInformation($"{instance} as {instanceAs}: {method.Name}({string.Join(';', arguments.Select(i => i))}) => {response}");
             _calls.Add(new RecordedCall(instanceAs, method, arguments, response));
         }
     }

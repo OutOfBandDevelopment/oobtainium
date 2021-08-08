@@ -1,4 +1,4 @@
-# OoBtainium
+﻿# OoBtainium
 
 ## Summary
 
@@ -6,7 +6,45 @@ Out-of-Band Development presents Oobtainium.  This is a simple mocking framework
 
 ## Examples 
 
-Enable 
+Simplified example
+
+```csharp
+    [TestMethod, TestCategory("Unit")]
+    public void SimpleTest()
+    {
+        var factory = new CaptureProxyFactory();
+
+        //mock out method response
+        var bindings = new CallBinder()
+            .Register<ITargetInterface>()
+                .Bind(a => a.ReturnValue(), () => "Hello World")
+                ;
+
+        //create instance with handler 
+        var instance = factory.Create<ITargetInterface>(handler: bindings.ToHandler());
+
+        //test function
+        var result = instance.ReturnValue();
+
+        //assert
+        Assert.AreEqual("Hello World", result);
+
+        //get recording from proxy instance
+        var recorder = ((IHaveCallRecorder)instance).Recorder;
+        foreach (var recoding in recorder)
+            this.TestContext.WriteLine(recoding?.ToString());
+
+        /*
+        ﻿ SimpleTest
+            Source: GeneralTests.cs line 106
+            Duration: 124 ms
+
+            Standard Output: 
+            TestContext Messages:
+            OoBDev.Oobtainium.Tests.GeneralTests+ITargetInterface::System.String ReturnValue()  => Hello World
+        */
+    }
+```
 
 ### 
 

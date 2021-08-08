@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace OoBDev.Oobtainium.Tests
@@ -11,7 +12,7 @@ namespace OoBDev.Oobtainium.Tests
     {
         public TestContext TestContext { get; set; }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Unit")]
         public async Task GeneralTest()
         {
             var services = new ServiceCollection()
@@ -101,6 +102,32 @@ namespace OoBDev.Oobtainium.Tests
                 > OoBDev.Oobtainium.Tests.GeneralTests+IAnotherInterface::System.Threading.Tasks.Task`1[System.Int32] DoWork2(System.String) [hello world!]
             */
         }
+
+    [TestMethod, TestCategory("Unit")]
+    public void SimpleTest()
+    {
+        var factory = new CaptureProxyFactory();
+
+        //mock out method response
+        var bindings = new CallBinder()
+            .Register<ITargetInterface>()
+                .Bind(a => a.ReturnValue(), () => "Hello World")
+                ;
+
+        //create instance with handler 
+        var instance = factory.Create<ITargetInterface>(handler: bindings.ToHandler());
+
+        //test function
+        var result = instance.ReturnValue();
+
+        //assert
+        Assert.AreEqual("Hello World", result);
+
+        //get recording from proxy instance
+        var recorder = ((IHaveCallRecorder)instance).Recorder;
+        foreach (var recoding in recorder)
+            this.TestContext.WriteLine(recoding?.ToString());
+    }
 
         public interface ITargetInterface
         {

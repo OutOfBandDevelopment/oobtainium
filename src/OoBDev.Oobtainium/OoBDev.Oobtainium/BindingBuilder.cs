@@ -28,6 +28,8 @@ namespace OoBDev.Oobtainium
         public IBindingBuilder<S> Bind(Expression<Action<S>> action, Func<object[], Task> callback) => AddBinding(action, callback);
 
         public IBindingBuilder<U> Register<U>() => new CallBinder(Store).Register<U>();
+
+        public ICallHandler ToHandler() => new CallHandler(Store);
     }
 
 }
