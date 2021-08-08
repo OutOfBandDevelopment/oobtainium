@@ -6,6 +6,6 @@
 
         public CallBinder(ICallBindingStore? store = null) => Store = store ?? new CallBindingStore();
 
-        public IBindingBuilder<T> Register<T>() => new BindingBuilder<T>(Store);
+        public IBindingBuilder<T> Build<T>() => new BindingBuilder<T>(Store);
     }
 }

@@ -78,7 +78,7 @@ namespace OoBDev.Oobtainium
             return this;
         }
 
-        public IBindingBuilder<U> Register<U>() => new BindingBuilder<U>(Store);
+        public IBindingBuilder<U> Build<U>() => new BindingBuilder<U>(Store);
     }
 
 }

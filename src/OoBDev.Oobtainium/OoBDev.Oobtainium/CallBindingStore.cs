@@ -10,8 +10,8 @@ namespace OoBDev.Oobtainium
     public static class CallBindingStoreExtensions
     {
         public static ICallBinder ToCallbinder(this ICallBindingStore store) => new CallBinder(store);
-        public static IBindingBuilder<T> Register<T>(this ICallBindingStore store) => store.ToCallbinder().Register<T>();
-        public static IBindingBuilder<T> Register<T>(this IHaveCallBindingStore have) => have.Store.Register<T>();
+        public static IBindingBuilder<T> Build<T>(this ICallBindingStore store) => store.ToCallbinder().Build<T>();
+        public static IBindingBuilder<T> Register<T>(this IHaveCallBindingStore have) => have.Store.Build<T>();
 
         //public static void Add(this ICallBindingStore store, Expression action) => store.Add(null, action.AsMethodInfo(), null);
         //public static void Add<T>(this ICallBindingStore store, Expression action) => store.Add(typeof(T), action.AsMethodInfo(), null);

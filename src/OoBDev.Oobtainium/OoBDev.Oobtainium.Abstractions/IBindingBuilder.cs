@@ -12,6 +12,6 @@ namespace OoBDev.Oobtainium
         /// </summary>
         /// <typeparam name="U"></typeparam>
         /// <returns></returns>
-        IBindingBuilder<U> Register<U>();
+        IBindingBuilder<U> Build<U>();
     }
 }

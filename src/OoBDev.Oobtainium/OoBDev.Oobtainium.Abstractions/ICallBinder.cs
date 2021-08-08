@@ -5,6 +5,6 @@
     /// </summary>
     public interface ICallBinder
     {
-        IBindingBuilder<T> Register<T>();
+        IBindingBuilder<T> Build<T>();
     }
 }
