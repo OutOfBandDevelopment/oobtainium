@@ -84,27 +84,27 @@ jobs:
     #  with:
     #    name: OoBDev.Oobtainium_Documents
     #    path: Publish/docs/  
-    #- name: Commit Tag
-    #  if: github.ref != 'refs/heads/main' && github.event_name != 'pull_request'
-    #  uses: EndBug/add-and-commit@v5
-    #  with:
-    #    add: 'docs'
-    #    message: '${{env.buildVersion}} (${{env.dacVersion}})'
-    #    tag: '${{env.buildVersion}}'
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Commit Tag
+      if: github.ref != 'refs/heads/main' && github.event_name != 'pull_request'
+      uses: EndBug/add-and-commit@v5
+      with:
+        #add: 'docs'
+        message: '${{env.buildVersion}} (${{env.dacVersion}})'
+        tag: '${{env.buildVersion}}'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     #    
     ## If main publish the docs
     #- name: Update Documentation
     #  if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     #  run: rsync -r Publish/docs/ docs
-    #- name: Commit Documentation and Tag
-    #  if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    #  uses: EndBug/add-and-commit@v5
-    #  with:
-    #    add: 'docs'
-    #    message: '${{env.buildVersion}} (${{env.dacVersion}})'
-    #    tag: '${{env.buildVersion}}'
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Commit Documentation and Tag
+      if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+      uses: EndBug/add-and-commit@v5
+      with:
+        #add: 'docs'
+        message: '${{env.buildVersion}} (${{env.dacVersion}})'
+        tag: '${{env.buildVersion}}'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
