@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using OoBDev.Oobtainium.Recording;
 using System;
 using System.Reflection;
 

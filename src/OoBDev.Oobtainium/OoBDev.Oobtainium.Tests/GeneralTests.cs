@@ -123,10 +123,11 @@ namespace OoBDev.Oobtainium.Tests
             //assert
             Assert.AreEqual("Hello World", result);
 
-            //get recording from proxy instance
-            var recorder = ((IHaveCallRecorder)instance).Recorder;
-            foreach (var recoding in recorder)
-                this.TestContext.WriteLine(recoding?.ToString());
+            //// TODO: fix this... in process of moving
+            ////get recording from proxy instance
+            //var recorder = ((IHaveCallRecorder)instance).Recorder;
+            //foreach (var recoding in recorder)
+            //    this.TestContext.WriteLine(recoding?.ToString());
         }
 
         [TestMethod, TestCategory(TestCategories.Unit)]
@@ -153,10 +154,11 @@ namespace OoBDev.Oobtainium.Tests
             builder.Remove(a => a.ReturnValue());
             Assert.IsNull(instance.ReturnValue());
 
-            //get recording from proxy instance
-            var recorder = ((IHaveCallRecorder)instance).Recorder;
-            foreach (var recoding in recorder)
-                this.TestContext.WriteLine(recoding?.ToString());
+            // TODO: fix this... in process of moving
+            ////get recording from proxy instance
+            //var recorder = ((IHaveCallRecorder)instance).Recorder;
+            //foreach (var recoding in recorder)
+            //    this.TestContext.WriteLine(recoding?.ToString());
 
             /*
             ﻿ OnAgainOffAgainTest

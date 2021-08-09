@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OoBDev.Oobtainium.Recording;
 
 namespace OoBDev.Oobtainium
 {
