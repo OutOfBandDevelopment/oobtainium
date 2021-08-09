@@ -55,8 +55,6 @@ jobs:
         echo "TEST_RESULTS_PATH=$TEST_RESULTS_PATH" >> $GITHUB_ENV 
         echo "DOCS_PATH=$DOCS_PATH" >> $GITHUB_ENV 
         echo "RESULTS_PATH=$RESULTS_PATH" >> $GITHUB_ENV   
-        mkdir Publish/docs >/dev/null 2>&1    
-        mkdir docs >/dev/null 2>&1      
 
     - name: Restore Project
       run: dotnet restore "$BUILD_PROJECT"
