@@ -55,7 +55,8 @@ jobs:
         echo "TEST_RESULTS_PATH=$TEST_RESULTS_PATH" >> $GITHUB_ENV 
         echo "DOCS_PATH=$DOCS_PATH" >> $GITHUB_ENV 
         echo "RESULTS_PATH=$RESULTS_PATH" >> $GITHUB_ENV   
-        mkdir Publish/docs >/dev/null 2>&1     
+        mkdir Publish/docs >/dev/null 2>&1    
+        mkdir docs >/dev/null 2>&1      
 
     - name: Restore Project
       run: dotnet restore "$BUILD_PROJECT"
@@ -78,6 +79,10 @@ jobs:
     #- name: Build Reports
     #  run: dotnet build "$REPORT_PROJECT" -f netcoreapp3.1 -p:PublishedBinaries=$RESULTS_PATH/Binary -p:SolutionDir=src -v n
       
+    - name: Update Documentation
+      if: github.event_name != 'pull_request'
+      run: rsync -r Publish/docs/ docs
+
     ## If not   just attach the docs as an artifact
     - name: Publish Documents
       if: github.ref != 'refs/heads/main'
@@ -96,9 +101,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     # If main publish the docs
-    - name: Update Documentation
-      if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-      run: rsync -r Publish/docs/ docs
     - name: Commit Documentation and Tag
       if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
       uses: EndBug/add-and-commit@v5
