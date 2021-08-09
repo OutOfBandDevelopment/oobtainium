@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OoBDev.Oobtainium.Recording;
 using OoBDev.Oobtainium.Tests.TestTargets;
 using System;
 using System.Threading.Tasks;
@@ -136,7 +137,7 @@ namespace OoBDev.Oobtainium.Tests
             var factory = new CaptureProxyFactory();
 
             //create instance with handler 
-            var instance = factory.Create<ITargetInterface>();
+            var instance = factory.Create<ITargetInterface>().AddRecorder();
 
             // not bound
 
@@ -154,11 +155,12 @@ namespace OoBDev.Oobtainium.Tests
             builder.Remove(a => a.ReturnValue());
             Assert.IsNull(instance.ReturnValue());
 
-            // TODO: fix this... in process of moving
-            ////get recording from proxy instance
-            //var recorder = ((IHaveCallRecorder)instance).Recorder;
-            //foreach (var recoding in recorder)
-            //    this.TestContext.WriteLine(recoding?.ToString());
+
+            Assert.IsTrue(instance.TryGetRecorder(out var recorder));
+
+            //get recording from proxy instance
+            foreach (var recoding in recorder)
+                this.TestContext.WriteLine(recoding?.ToString());
 
             /*
             ﻿ OnAgainOffAgainTest

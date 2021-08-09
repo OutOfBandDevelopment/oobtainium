@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.ComponentModel
 {
     public static class TypeExtensions
     {

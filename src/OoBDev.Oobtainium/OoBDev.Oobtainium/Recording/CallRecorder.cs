@@ -27,8 +27,8 @@ namespace OoBDev.Oobtainium.Recording
 
         private void RecordCall(object instance, Type instanceAs, MethodInfo method, object[] arguments, object? response)
         {
-            _log?.LogInformation($"{instance} as {instanceAs}: {method.Name}({string.Join(';', arguments.Select(i => i))}) => {response}");
-            _calls.Add(new RecordedCall(instanceAs, method, arguments, response));
+            _log?.LogDebug($"{instance} as {instanceAs}: {method.Name}({string.Join(';', arguments.Select(i => i))}) => {response}");
+            _calls.Add(new RecordedCall(instance, instanceAs, method, arguments, response));
         }
     }
 }

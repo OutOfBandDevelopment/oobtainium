@@ -1,4 +1,4 @@
-﻿namespace OoBDev.Oobtainium
+﻿namespace OoBDev.Oobtainium.Recording
 {
     public interface IHaveCallRecorder
     {

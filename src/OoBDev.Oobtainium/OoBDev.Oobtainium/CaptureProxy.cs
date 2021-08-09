@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using OoBDev.Oobtainium.Recording;
+using OoBDev.Oobtainium.ComponentModel;
 using System;
 using System.Collections.Concurrent;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace OoBDev.Oobtainium
@@ -136,7 +135,6 @@ namespace OoBDev.Oobtainium
 
         internal static I Create(
             ICallHandler? handler = null,
-            ICallRecorder? capture = null,
             ILogger<I>? logger = null
             )
         {

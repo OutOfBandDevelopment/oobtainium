@@ -2,5 +2,8 @@
 {
     public class ClassWithoutInterfaces
     {
+        public void ClassAction()
+        {
+        }
     }
 }

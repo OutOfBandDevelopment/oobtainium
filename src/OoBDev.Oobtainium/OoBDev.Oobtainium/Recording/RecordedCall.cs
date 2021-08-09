@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Reflection;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.Recording
 {
     public class RecordedCall : IRecordedCall
     {
-        public RecordedCall(Type? type, MethodInfo method, object[] arguments, object? response)
+        public RecordedCall(object instance, Type? type, MethodInfo method, object[] arguments, object? response)
         {
             this.Type = type;
             this.Method = method;
@@ -14,6 +14,7 @@ namespace OoBDev.Oobtainium
             this.Response = response;
         }
 
+        public object Instance { get; }
         public Type? Type { get; }
         public MethodInfo Method { get; }
         public object[] Arguments { get; }

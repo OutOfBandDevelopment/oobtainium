@@ -15,6 +15,6 @@ namespace OoBDev.Oobtainium
         /// <param name="Recorder">Optional: may be passed in or provided though the IServiceProvider</param>
         /// <param name="logger">Optional: may be passed in or provided though the IServiceProvider</param>
         /// <returns></returns>
-        T Create<T>(ICallHandler? handler = null, ICallRecorder? Recorder = null, ILogger<T>? logger = null);
+        T Create<T>(ICallHandler? handler = null, ILogger<T>? logger = null);
     }
 }

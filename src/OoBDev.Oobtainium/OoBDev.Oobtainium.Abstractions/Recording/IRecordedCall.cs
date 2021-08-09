@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Reflection;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.Recording
 {
     /// <summary>
     /// Captured invocation
     /// </summary>
     public interface IRecordedCall
     {
+        object Instance { get; }
+
         /// <summary>
         /// Target type for calls that was invoked.  When using the generic interfaces this will be the interface provided to the proxy factory.
         /// </summary>

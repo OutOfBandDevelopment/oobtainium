@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.Recording
 {
     public delegate void CaptureHandler(object instance, Type instanceAs, MethodInfo method, object[] arguments, object? response);
     /// <summary>
@@ -13,10 +13,5 @@ namespace OoBDev.Oobtainium
         CaptureHandler? Capture { get; }
 
         void Clear();
-    }
-
-    public interface ICallRecorderFactory
-    {
-        ICallRecorder Create();
     }
 }

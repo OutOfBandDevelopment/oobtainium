@@ -1,19 +1,56 @@
 ﻿using Microsoft.Extensions.Logging;
+using OoBDev.Oobtainium.Reflection;
 using System;
+using System.Reflection;
 
 namespace OoBDev.Oobtainium.Recording
 {
-    public class CallRecorderProxyFactory
+    public class CallRecorderProxyFactory : ICallRecorderProxyFactory
     {
-        public static T WithRecorder<T>(
+        public readonly ICallRecorderFactory _factory;
+
+        public CallRecorderProxyFactory(ICallRecorderFactory? factory = null) => _factory = factory ?? new CallRecorderFactory();
+
+        public T AddRecorder<T>(T instance) => instance.AddRecorder(_factory);
+        public T AttachRecorder<T>(T instance, ICallRecorder recorder) => instance.AddRecorder(recorder);
+
+        internal static T InternalAddRecorder<T>(
             T instance,
             ICallRecorder? recorder = null,
-            IServiceProvider? serviceProvider = null
+            ICallRecorderFactory? factory = null
             ) =>
-            CallRecorderProxy<T>.Create(
+            AttachRecorder(
                 instance,
-                recorder ?? serviceProvider?.GetService(typeof(ICallRecorder)) as ICallRecorder ??
-                    new CallRecorder(serviceProvider?.GetService(typeof(ILogger<ICallRecorder>)) as ILogger<ICallRecorder>)
+                recorder ?? (factory ?? new CallRecorderFactory()).Create()
             );
+
+        internal static T AttachRecorder<T>(
+            T instance,
+            ICallRecorder? capture = null,
+            ILogger<T>? log = null
+            )
+        {
+            if (instance == null) throw new ArgumentNullException(nameof(instance));
+            if (instance is INeedCallRecorder need)
+            {
+                log?.LogDebug($"Adding recorder to {instance}");
+                //Is class is already support call recording then just update the recorder
+                need.Recorder = capture ?? new CallRecorder();
+                return instance;
+            }
+            else if (instance is IHaveCallRecorder)
+            {
+                log?.LogDebug($"Call recorder already attached to {instance}");
+                // if already has a recorder by 
+                return instance;
+            }
+            else
+            {
+                log?.LogDebug($"Creating proxy of {instance}");
+                var extended = instance.AddInterface<T>(typeof(CallRecorderProxy<>));
+                var proxy = AttachRecorder(extended, capture);
+                return proxy;
+            }
+        }
     }
 }
