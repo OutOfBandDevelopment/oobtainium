@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="OoBDev.Oobtainium.ExpressionExtensions">
+  <Summary>
+    <Class>OoBDev.Oobtainium.ExpressionExtensions</Class>
+    <Assembly>OoBDev.Oobtainium</Assembly>
+    <Files>
+      <File>/home/runner/work/oobtainium/oobtainium/src/OoBDev.Oobtainium/OoBDev.Oobtainium/ExpressionExtensions.cs</File>
+    </Files>
+    <Coveredlines>1</Coveredlines>
+    <Uncoveredlines>0</Uncoveredlines>
+    <Coverablelines>1</Coverablelines>
+    <Totallines>11</Totallines>
+    <Linecoverage>100</Linecoverage>
+    <Coveredbranches>2</Coveredbranches>
+    <Totalbranches>4</Totalbranches>
+    <Branchcoverage>50</Branchcoverage>
+    <Title>src/OoBDev.Oobtainium/OoBDev.Oobtainium.sln - 0.1.0-dev-poc-typebuilding.49</Title>
+  </Summary>
+  <Metrics>
+    <Element name="AsMethodInfo">
+      <Linecoverage>100</Linecoverage>
+      <Branchcoverage>50.0</Branchcoverage>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="/home/runner/work/oobtainium/oobtainium/src/OoBDev.Oobtainium/OoBDev.Oobtainium/ExpressionExtensions.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Linq.Expressions;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Reflection;" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace OoBDev.Oobtainium" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public static class ExpressionExtensions" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="8" visits="18" coverage="PartiallyCovered" coveredbranches="2" totalbranches="4" content="        public static MethodInfo? AsMethodInfo(this Expression? expression) =&gt; ((expression as LambdaExpression)?.Body as MethodCallExpression)?.Method;" />
+      <LineAnalysis line="9" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>

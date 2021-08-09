@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="OoBDev.Oobtainium.Recording.CallRecorderProxy`1">
+  <Summary>
+    <Class>OoBDev.Oobtainium.Recording.CallRecorderProxy`1</Class>
+    <Assembly>OoBDev.Oobtainium</Assembly>
+    <Files>
+      <File>/home/runner/work/oobtainium/oobtainium/src/OoBDev.Oobtainium/OoBDev.Oobtainium/Recording/CallRecorderProxy.cs</File>
+    </Files>
+    <Coveredlines>0</Coveredlines>
+    <Uncoveredlines>15</Uncoveredlines>
+    <Coverablelines>15</Coverablelines>
+    <Totallines>45</Totallines>
+    <Linecoverage>0</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>14</Totalbranches>
+    <Branchcoverage>0</Branchcoverage>
+    <Title>src/OoBDev.Oobtainium/OoBDev.Oobtainium.sln - 0.1.0-dev-poc-typebuilding.49</Title>
+  </Summary>
+  <Metrics>
+    <Element name="get_Recorder">
+      <Linecoverage>0</Linecoverage>
+      <Branchcoverage>100</Branchcoverage>
+    </Element>
+    <Element name="Capture">
+      <Linecoverage>0</Linecoverage>
+      <Branchcoverage>0</Branchcoverage>
+    </Element>
+    <Element name="Invoke">
+      <Linecoverage>0</Linecoverage>
+      <Branchcoverage>0</Branchcoverage>
+    </Element>
+    <Element name="Create">
+      <Linecoverage>0</Linecoverage>
+      <Branchcoverage>0</Branchcoverage>
+    </Element>
+  </Metrics>
+  <Files>
+    <File name="/home/runner/work/oobtainium/oobtainium/src/OoBDev.Oobtainium/OoBDev.Oobtainium/Recording/CallRecorderProxy.cs">
+      <LineAnalysis line="1" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System;" />
+      <LineAnalysis line="2" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="using System.Reflection;" />
+      <LineAnalysis line="3" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="4" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="namespace OoBDev.Oobtainium.Recording" />
+      <LineAnalysis line="5" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="{" />
+      <LineAnalysis line="6" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    public class CallRecorderProxy&lt;T&gt; : DispatchProxy, INeedCallRecorder&lt;T&gt;, IHaveCallRecorder" />
+      <LineAnalysis line="7" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    {" />
+      <LineAnalysis line="8" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        private T _instance;" />
+      <LineAnalysis line="9" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        public ICallRecorder Recorder { get; set; }" />
+      <LineAnalysis line="10" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="11" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        public void Capture(T instance)" />
+      <LineAnalysis line="12" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="13" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="4" content="            if (_instance != null &amp;&amp; ReferenceEquals(_instance, instance)) return;" />
+      <LineAnalysis line="14" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="            else if (_instance != null) throw new NotSupportedException(&quot;Instance already set&quot;);" />
+      <LineAnalysis line="15" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="            else _instance = instance ?? throw new ArgumentNullException($&quot;Instance of type {instance} is required&quot;);" />
+      <LineAnalysis line="16" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="17" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="18" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        protected override object Invoke(MethodInfo targetMethod, object[] args)" />
+      <LineAnalysis line="19" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="20" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            var response = targetMethod.Invoke(_instance, args);" />
+      <LineAnalysis line="21" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="            Recorder?.Capture(_instance, typeof(T), targetMethod, args, response);" />
+      <LineAnalysis line="22" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return response;" />
+      <LineAnalysis line="23" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="24" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="25" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        internal static T Create(" />
+      <LineAnalysis line="26" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            T instance," />
+      <LineAnalysis line="27" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            ICallRecorder? capture = null" />
+      <LineAnalysis line="28" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            )" />
+      <LineAnalysis line="29" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        {" />
+      <LineAnalysis line="30" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            object proxy = instance;" />
+      <LineAnalysis line="31" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="            if (proxy is INeedCallRecorder&lt;T&gt; need)" />
+      <LineAnalysis line="32" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="33" visits="0" coverage="NotCovered" coveredbranches="0" totalbranches="2" content="                need.Recorder = capture ?? new CallRecorder();" />
+      <LineAnalysis line="34" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="35" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            else" />
+      <LineAnalysis line="36" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            {" />
+      <LineAnalysis line="37" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                var recorder = (INeedCallRecorder&lt;T&gt;)Create&lt;T, CaptureProxy&lt;T&gt;&gt;();" />
+      <LineAnalysis line="38" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                recorder.Capture(instance);" />
+      <LineAnalysis line="39" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="                proxy = Create(instance, capture);" />
+      <LineAnalysis line="40" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="            }" />
+      <LineAnalysis line="41" visits="0" coverage="NotCovered" coveredbranches="" totalbranches="" content="            return (T)proxy;" />
+      <LineAnalysis line="42" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="        }" />
+      <LineAnalysis line="43" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="" />
+      <LineAnalysis line="44" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="    }" />
+      <LineAnalysis line="45" visits="-1" coverage="NotCoverable" coveredbranches="" totalbranches="" content="}" />
+    </File>
+  </Files>
+</CoverageReport>
