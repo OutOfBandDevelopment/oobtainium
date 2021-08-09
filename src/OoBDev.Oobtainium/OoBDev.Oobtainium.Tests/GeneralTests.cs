@@ -12,7 +12,7 @@ namespace OoBDev.Oobtainium.Tests
     {
         public TestContext TestContext { get; set; }
 
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory(TestCategories.Unit)]
         public async Task GeneralTest()
         {
             var services = new ServiceCollection()
@@ -103,7 +103,7 @@ namespace OoBDev.Oobtainium.Tests
             */
         }
 
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory(TestCategories.Unit)]
         public void SimpleTest()
         {
             var factory = new CaptureProxyFactory();
@@ -129,7 +129,7 @@ namespace OoBDev.Oobtainium.Tests
                 this.TestContext.WriteLine(recoding?.ToString());
         }
 
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory(TestCategories.Unit)]
         public void OnAgainOffAgainTest()
         {
             var factory = new CaptureProxyFactory();
