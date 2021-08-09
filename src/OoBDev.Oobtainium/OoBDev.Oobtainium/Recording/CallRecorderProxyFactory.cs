@@ -47,7 +47,7 @@ namespace OoBDev.Oobtainium.Recording
             else
             {
                 log?.LogDebug($"Creating proxy of {instance}");
-                var extended = instance.AddInterface<T>(typeof(CallRecorderProxy<>));
+                var extended = instance.AddInterface<T, CallRecorderProxy<T>>();
                 var proxy = AttachRecorder(extended, capture);
                 return proxy;
             }

@@ -23,21 +23,23 @@ namespace OoBDev.Oobtainium.Reflection
             }
         }
         private static ConcurrentDictionary<string, Type> _types = new ConcurrentDictionary<string, Type>();
-        internal static Type AddInterfaceToInstanceType<T>(object instance, params Type[] additionalInterfaces)
+        internal static Type AddInterfaceToInstanceType<T, TProxy>(object instance)
+            where TProxy : DispatchProxy
         {
-            var newInterfaces = new[] { typeof(T) }.Concat(additionalInterfaces ?? Type.EmptyTypes);
-            if (newInterfaces.Any(i => !i.IsInterface))
-            {
-                throw new NotSupportedException($"additional types must be interfaces {string.Join(';', newInterfaces.Where(i => !i.IsInterface))}");
-            }
+            //if (!typeof(T).IsInterface)
+            //{
+            //    throw new NotSupportedException($"additional types must be interfaces {string.Join(';', newInterfaces.Where(i => !i.IsInterface))}");
+            //}
 
+            var excludeInterfaces = typeof(TProxy).GetInterfaces() ?? Type.EmptyTypes;
             var existingType = instance.GetType();
 
             TypeDescriptor.Refresh(existingType);
 
-            var interfaces = from inf in existingType.GetInterfaces().Concat(newInterfaces).Distinct()
+            var interfaces = from inf in existingType.GetInterfaces().Concat(new[] { typeof(T) }).Distinct()
                              let atts = TypeDescriptor.GetAttributes(inf).OfType<GeneratedInterfaceAttribute>()
                              where !atts.Any()
+                             where !excludeInterfaces.Contains(inf)
                              select inf;
 
             var typeName = string.Join('_', interfaces.Select(i => i.Name));
@@ -59,26 +61,21 @@ namespace OoBDev.Oobtainium.Reflection
             }
         }
 
-        internal static T AddInterface<T>(this object existing, Type proxyClass)
+        internal static T AddInterface<T, TProxy>(this object existing)
+            where TProxy : WrappedDispatchProxy<T>
         {
             if (!typeof(T).IsInterface) throw new NotSupportedException($"<T> must be an interface ({typeof(T)})");
-            if (proxyClass == null) throw new ArgumentNullException(nameof(proxyClass));
-            if (!proxyClass.IsGenericType) throw new NotSupportedException($"{nameof(proxyClass)} must be generic");
 
-            if (existing is T already) return already;
-            else
-            {
-                //stack type here
-                var type = AddInterfaceToInstanceType<T>(existing, typeof(INeedInstance));
+            //stack type here
+            var type = AddInterfaceToInstanceType<T, TProxy>(existing);
 
-                var proxyType = proxyClass.MakeGenericType(type);
-                var createMethod = typeof(DispatchProxy).GetMethod(nameof(DispatchProxy.Create), BindingFlags.Static | BindingFlags.Public);
-                var genericCreateMethod = createMethod.MakeGenericMethod(type, proxyType);
-                var newProxy = genericCreateMethod.Invoke(null, null);
-                var wrapped = (INeedInstance)newProxy;
-                wrapped.Instance = (T)existing;
-                return (T)newProxy;
-            }
+            var proxyType = typeof(TProxy).GetGenericTypeDefinition().MakeGenericType(type);
+            var createMethod = typeof(DispatchProxy).GetMethod(nameof(DispatchProxy.Create), BindingFlags.Static | BindingFlags.Public);
+            var genericCreateMethod = createMethod.MakeGenericMethod(type, proxyType);
+            var newProxy = genericCreateMethod.Invoke(null, null);
+            var wrapped = (INeedInstance)newProxy;
+            wrapped.Instance = existing;
+            return (T)newProxy;
         }
     }
 }

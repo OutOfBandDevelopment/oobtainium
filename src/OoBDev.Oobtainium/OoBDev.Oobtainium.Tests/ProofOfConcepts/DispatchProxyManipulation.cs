@@ -1,9 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OoBDev.Oobtainium.ComponentModel;
+using OoBDev.Oobtainium.Reflection;
 using OoBDev.Oobtainium.Tests.TestTargets;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Reflection;
-using OoBDev.Oobtainium.Reflection;
-using static OoBDev.Oobtainium.Tests.ProofOfConcepts.DispatchProxyManipulation;
 
 namespace OoBDev.Oobtainium.Tests.ProofOfConcepts
 {
@@ -16,7 +17,15 @@ namespace OoBDev.Oobtainium.Tests.ProofOfConcepts
         {
             protected override object Invoke(MethodInfo targetMethod, object[] args)
             {
-                throw new System.NotImplementedException();
+                Debug.WriteLine($"\t:> {typeof(T)}::{targetMethod}");
+                if (targetMethod.DeclaringType.IsInstanceOfType(this.Instance))
+                {
+                    return targetMethod.Invoke(this.Instance, args);
+                }
+                else
+                {
+                    return targetMethod.ReturnType.GetDefaultValue();
+                }
             }
         }
 
@@ -26,8 +35,8 @@ namespace OoBDev.Oobtainium.Tests.ProofOfConcepts
             var proxy1 = DispatchProxy.Create<ITargetInterface, Proxy<ITargetInterface>>();
             Assert.IsInstanceOfType(proxy1, typeof(ITargetInterface));
 
-            object proxy2 = proxy1.AddInterface<IAnotherInterface>(typeof(Proxy<>));
-            object proxy3 = proxy2.AddInterface<IEmptyInterface>(typeof(Proxy<>));
+            object proxy2 = proxy1.AddInterface<IAnotherInterface, Proxy<IAnotherInterface>>();
+            object proxy3 = proxy2.AddInterface<IEmptyInterface, Proxy<IEmptyInterface>>();
 
             var c1 = (IAnotherInterface)proxy3;
             this.TestContext.WriteLine($"\"{c1.DoWork("hi!")}\"");
@@ -61,11 +70,11 @@ namespace OoBDev.Oobtainium.Tests.ProofOfConcepts
 
             Assert.IsInstanceOfType(proxy1, typeof(IAnotherInterface));
 
-            object proxy2 = proxy1.AddInterface<ITargetInterface>(typeof(Proxy<>));
-            object proxy3 = proxy2.AddInterface<IEmptyInterface>(typeof(Proxy<>));
+            object proxy2 = proxy1.AddInterface<ITargetInterface, Proxy<ITargetInterface>>();
+            object proxy3 = proxy2.AddInterface<IEmptyInterface, Proxy<IEmptyInterface>>();
 
             var c1 = (IAnotherInterface)proxy3;
-            this.TestContext.WriteLine($"\"{c1.DoWork("hi!")}\"");
+            //this.TestContext.WriteLine($"\"{c1.DoWork("hi!")}\"");
             var c2 = (ITargetInterface)proxy3;
             this.TestContext.WriteLine($"\"{c2.ReturnValue()}\"");
             var c3 = (IEmptyInterface)proxy3;
