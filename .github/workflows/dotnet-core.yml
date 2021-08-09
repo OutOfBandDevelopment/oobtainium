@@ -40,7 +40,6 @@ jobs:
         BUILD_PROJECT=src/OoBDev.Oobtainium/OoBDev.Oobtainium.sln
         REPORT_PROJECT=src/OoBDev.Oobtainium/OoBDev.Oobtainium.rptproj
         BUILD_CONFIGURATION=Release
-        mkdir $DOCS_PATH
         dotnet tool restore
         buildVersion=`dotnet gitversion /output json /showvariable FullSemVer`
         dacVersion=`dotnet gitversion /output json /showvariable AssemblySemVer`
