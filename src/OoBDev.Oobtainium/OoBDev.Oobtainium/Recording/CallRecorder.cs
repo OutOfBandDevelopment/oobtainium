@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.Recording
 {
     public class CallRecorder : ICallRecorder
     {

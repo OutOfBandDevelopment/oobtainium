@@ -1,19 +1,19 @@
 ﻿using Microsoft.Extensions.Logging;
+using OoBDev.Oobtainium.Recording;
 using System;
 using System.Collections.Concurrent;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace OoBDev.Oobtainium
 {
-    public class CaptureProxy<I> : DispatchProxy, IHaveCallRecorder, IHaveCallHandler, IHaveCallBindingStore
+    public class CaptureProxy<I> : DispatchProxy, IHaveCallHandler, IHaveCallBindingStore
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        private ICallRecorder _capture;
         private ICallHandler _handler;
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-        ICallRecorder IHaveCallRecorder.Recorder => _capture;
         ICallHandler IHaveCallHandler.Handler => _handler;
         ICallBindingStore IHaveCallBindingStore.Store => _handler.Store;
 
@@ -71,18 +71,6 @@ namespace OoBDev.Oobtainium
                 {
                     _logger?.LogDebug($"{targetMethod} is not that special");
                 }
-            }
-
-
-            //Capture response
-
-            if (this == _capture)
-            {
-                _logger?.LogDebug($"Interception inception so bypass");
-            }
-            else
-            {
-                _capture?.Capture?.Invoke(this, typeof(I), targetMethod, args, captured);
             }
 
             //TODO: add type converter support
@@ -156,7 +144,6 @@ namespace OoBDev.Oobtainium
             if (proxy != null)
             {
                 var unwrapped = (CaptureProxy<I>)proxy;
-                unwrapped._capture = capture ?? new CallRecorder();
                 unwrapped._handler = handler ?? new CallHandler();
                 unwrapped._logger = logger;
             }

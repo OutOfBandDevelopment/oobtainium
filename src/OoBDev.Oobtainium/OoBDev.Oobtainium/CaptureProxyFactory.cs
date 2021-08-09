@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
+using System.Reflection;
 
 namespace OoBDev.Oobtainium
 {

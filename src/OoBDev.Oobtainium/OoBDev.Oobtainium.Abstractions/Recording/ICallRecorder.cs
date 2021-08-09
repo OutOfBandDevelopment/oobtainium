@@ -14,4 +14,9 @@ namespace OoBDev.Oobtainium
 
         void Clear();
     }
+
+    public interface ICallRecorderFactory
+    {
+        ICallRecorder Create();
+    }
 }
