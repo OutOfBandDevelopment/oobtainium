@@ -55,7 +55,7 @@ namespace OoBDev.Oobtainium.Tests
                     ;
 
             //create proxy 
-            var instance = factory.Create<ITargetInterface>();
+            var instance = factory.CreateWithRecorder<ITargetInterface>();
 
             TestContext.WriteLine($"Out> {instance.ReturnValue()}");
             instance.VoidReturn();
@@ -78,11 +78,11 @@ namespace OoBDev.Oobtainium.Tests
             this.TestContext.WriteLine($"{await another.DoWork2("hello world!")}");
 
             //retrieve call recorder
-            var captured = sp.GetRequiredService<ICallRecorder>();
-            foreach (var recoding in captured)
-            {
-                TestContext.WriteLine($"> {recoding}");
-            }
+            Assert.IsTrue(instance.TryGetRecorder(out var recorder));
+            //get recording from proxy instance
+            foreach (var recoding in recorder)
+                this.TestContext.WriteLine(recoding?.ToString());
+
             /*
                 > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String ReturnValue()  => 295b1cf5-05b3-4e21-a27b-2fcb82d8ef74
                 > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::Void VoidReturn()  

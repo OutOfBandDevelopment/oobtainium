@@ -29,7 +29,8 @@ namespace OoBDev.Oobtainium.Tests.ProofOfConcepts
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory(TestCategories.PoC)]
+        [TestCategory(TestCategories.Feature.Reflection)]
         public void Stack_Interfaces_On_DispatchProxy()
         {
             var proxy1 = DispatchProxy.Create<ITargetInterface, Proxy<ITargetInterface>>();
@@ -63,7 +64,8 @@ namespace OoBDev.Oobtainium.Tests.ProofOfConcepts
             }
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory(TestCategories.PoC)]
+        [TestCategory(TestCategories.Feature.Reflection)]
         public void Stack_Interfaces_On_Class()
         {
             var proxy1 = new ClassWithInterface();

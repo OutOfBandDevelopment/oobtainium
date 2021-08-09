@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OoBDev.Oobtainium.ComponentModel;
+using System;
+using System.Reflection;
 
 namespace OoBDev.Oobtainium.Recording
 {
@@ -24,5 +26,13 @@ namespace OoBDev.Oobtainium.Recording
             recorder = default;
             return false;
         }
+
+        internal static bool AllowRecording(this MethodInfo method) => method switch
+        {
+            null => false,
+            _ when method.HasAttribute<ExcludeFromRecordingAttribute>() => false,
+            _ when method.DeclaringType?.HasAttribute<ExcludeFromRecordingAttribute>() ?? false => false,
+            _ => true
+        };
     }
 }

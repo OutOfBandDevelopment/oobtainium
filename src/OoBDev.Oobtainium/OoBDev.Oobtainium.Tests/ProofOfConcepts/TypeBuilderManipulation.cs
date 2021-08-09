@@ -12,6 +12,7 @@ namespace OoBDev.Oobtainium.Tests.ProofOfConcepts
         public TestContext TestContext { get; set; }
 
         [TestMethod, TestCategory(TestCategories.PoC)]
+        [TestCategory(TestCategories.Feature.Reflection)]
         public void Add_Interface_To_Existing_Type()
         {
             var existingType =typeof(ClassWithoutInterfaces);

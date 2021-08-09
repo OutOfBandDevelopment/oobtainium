@@ -10,7 +10,8 @@ namespace OoBDev.Oobtainium.Recording
         protected override object Invoke(MethodInfo targetMethod, object[] args)
         {
             var response = targetMethod.Invoke(this.Instance, args);
-            Recorder?.Capture(Instance, typeof(T), targetMethod, args, response);
+            if (targetMethod.AllowRecording())
+                Recorder?.Capture(Instance, typeof(T), targetMethod, args, response);
             return response;
         }
     }

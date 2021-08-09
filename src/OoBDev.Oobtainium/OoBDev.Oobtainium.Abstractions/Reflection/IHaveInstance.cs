@@ -1,5 +1,9 @@
-﻿namespace OoBDev.Oobtainium.Reflection
+﻿using OoBDev.Oobtainium.Recording;
+
+namespace OoBDev.Oobtainium.Reflection
 {
+
+    [ExcludeFromRecording]
     public interface IHaveInstance
     {
         object Instance { get; }

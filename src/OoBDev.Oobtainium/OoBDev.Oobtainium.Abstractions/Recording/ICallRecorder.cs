@@ -8,6 +8,7 @@ namespace OoBDev.Oobtainium.Recording
     /// <summary>
     /// ICallRecorder adds support to capture proxy service calls in order of execution. 
     /// </summary>
+    [ExcludeFromRecording]
     public interface ICallRecorder : IEnumerable<IRecordedCall>
     {
         CaptureHandler? Capture { get; }

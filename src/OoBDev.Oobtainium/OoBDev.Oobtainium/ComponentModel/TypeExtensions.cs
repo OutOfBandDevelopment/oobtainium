@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace OoBDev.Oobtainium.ComponentModel
@@ -36,5 +38,15 @@ namespace OoBDev.Oobtainium.ComponentModel
 
             return null;
         }
+
+        public static IEnumerable<Attribute> GetAttributes(this object instance) => instance switch
+        {
+            Type type => TypeDescriptor.GetAttributes(type).OfType<Attribute>(),
+            _=> TypeDescriptor.GetAttributes(instance).OfType<Attribute>()
+        };
+
+        public static bool HasAttribute<TAttribute>(this object instance)
+            where TAttribute : Attribute => 
+            instance?.GetAttributes().Any(a => typeof(TAttribute).IsInstanceOfType(a)) ?? false;
     }
 }

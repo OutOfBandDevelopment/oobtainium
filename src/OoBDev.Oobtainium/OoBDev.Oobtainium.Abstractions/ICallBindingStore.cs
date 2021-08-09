@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OoBDev.Oobtainium.Recording;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -7,6 +8,7 @@ namespace OoBDev.Oobtainium
     /// <summary>
     /// ICallBindingStore is used for configuring callback and interception bindings on the proxy classes
     /// </summary>
+    [ExcludeFromRecording]
     public interface ICallBindingStore
     {
         void Add(Type? type, MethodInfo? method, Delegate? callback);

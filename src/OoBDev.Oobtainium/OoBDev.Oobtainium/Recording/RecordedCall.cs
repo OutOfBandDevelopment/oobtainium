@@ -8,6 +8,7 @@ namespace OoBDev.Oobtainium.Recording
     {
         public RecordedCall(object instance, Type? type, MethodInfo method, object[] arguments, object? response)
         {
+            this.Instance = instance;
             this.Type = type;
             this.Method = method;
             this.Arguments = arguments ?? Array.Empty<object>();

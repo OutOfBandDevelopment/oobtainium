@@ -6,6 +6,7 @@ namespace OoBDev.Oobtainium.Recording
     /// <summary>
     /// Captured invocation
     /// </summary>
+    [ExcludeFromRecording]
     public interface IRecordedCall
     {
         object Instance { get; }

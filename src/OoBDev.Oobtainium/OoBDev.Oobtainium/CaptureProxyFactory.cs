@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using OoBDev.Oobtainium.Recording;
 using System;
-using System.Reflection;
 
 namespace OoBDev.Oobtainium
 {
@@ -17,8 +16,14 @@ namespace OoBDev.Oobtainium
             CaptureProxy<T>.Create(
                 handler ?? _serviceProvider?.GetService(typeof(ICallHandler)) as ICallHandler ??
                     new CallHandler(_serviceProvider?.GetService(typeof(ICallBindingStore)) as ICallBindingStore),
-
                 logger ?? _serviceProvider?.GetService(typeof(ILogger<T>)) as ILogger<T>
             );
+
+        public T CreateWithRecorder<T>(
+            ICallRecorder? recorder = null,
+            ICallHandler? handler = null,
+            ILogger<T>? logger = null
+            ) => Create(handler, logger).AddRecorder(recorder ?? new CallRecorderFactory(_serviceProvider).Create())
+            ;
     }
 }
