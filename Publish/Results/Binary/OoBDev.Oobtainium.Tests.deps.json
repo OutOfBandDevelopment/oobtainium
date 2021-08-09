@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "OoBDev.Oobtainium.Tests/0.1.0-rc.18": {
+      "OoBDev.Oobtainium.Tests/0.1.0-dev-poc-typebuilding.20": {
         "dependencies": {
           "MSTest.TestAdapter": "2.1.0",
           "MSTest.TestFramework": "2.1.0",
@@ -1309,7 +1309,7 @@
     }
   },
   "libraries": {
-    "OoBDev.Oobtainium.Tests/0.1.0-rc.18": {
+    "OoBDev.Oobtainium.Tests/0.1.0-dev-poc-typebuilding.20": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
