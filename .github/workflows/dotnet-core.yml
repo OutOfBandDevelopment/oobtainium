@@ -81,7 +81,11 @@ jobs:
       
     - name: Update Documentation
       if: github.event_name != 'pull_request'
-      run: rsync -r Publish/docs/ docs
+      run: rsync -r $DOCS_PATH docs
+      
+    - name: Update Documentation
+      if: github.event_name != 'pull_request'
+      run: rsync -r $RESULTS_PATH/Coverage docs/CoverageReports
 
     ## If not   just attach the docs as an artifact
     - name: Publish Documents
