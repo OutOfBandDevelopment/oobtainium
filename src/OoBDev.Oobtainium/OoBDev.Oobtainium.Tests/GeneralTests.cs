@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OoBDev.Oobtainium.Recording;
 using OoBDev.Oobtainium.Tests.TestTargets;
 using System;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace OoBDev.Oobtainium.Tests
     {
         public TestContext TestContext { get; set; }
 
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory(TestCategories.Unit)]
         public async Task GeneralTest()
         {
             var services = new ServiceCollection()
@@ -54,7 +55,7 @@ namespace OoBDev.Oobtainium.Tests
                     ;
 
             //create proxy 
-            var instance = factory.Create<ITargetInterface>();
+            var instance = factory.CreateWithRecorder<ITargetInterface>();
 
             TestContext.WriteLine($"Out> {instance.ReturnValue()}");
             instance.VoidReturn();
@@ -77,11 +78,11 @@ namespace OoBDev.Oobtainium.Tests
             this.TestContext.WriteLine($"{await another.DoWork2("hello world!")}");
 
             //retrieve call recorder
-            var captured = sp.GetRequiredService<ICallRecorder>();
-            foreach (var recoding in captured)
-            {
-                TestContext.WriteLine($"> {recoding}");
-            }
+            Assert.IsTrue(instance.TryGetRecorder(out var recorder));
+            //get recording from proxy instance
+            foreach (var recoding in recorder)
+                this.TestContext.WriteLine(recoding?.ToString());
+
             /*
                 > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String ReturnValue()  => 295b1cf5-05b3-4e21-a27b-2fcb82d8ef74
                 > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::Void VoidReturn()  
@@ -103,7 +104,7 @@ namespace OoBDev.Oobtainium.Tests
             */
         }
 
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory(TestCategories.Unit)]
         public void SimpleTest()
         {
             var factory = new CaptureProxyFactory();
@@ -123,19 +124,20 @@ namespace OoBDev.Oobtainium.Tests
             //assert
             Assert.AreEqual("Hello World", result);
 
-            //get recording from proxy instance
-            var recorder = ((IHaveCallRecorder)instance).Recorder;
-            foreach (var recoding in recorder)
-                this.TestContext.WriteLine(recoding?.ToString());
+            //// TODO: fix this... in process of moving
+            ////get recording from proxy instance
+            //var recorder = ((IHaveCallRecorder)instance).Recorder;
+            //foreach (var recoding in recorder)
+            //    this.TestContext.WriteLine(recoding?.ToString());
         }
 
-        [TestMethod, TestCategory("Unit")]
+        [TestMethod, TestCategory(TestCategories.Unit)]
         public void OnAgainOffAgainTest()
         {
             var factory = new CaptureProxyFactory();
 
             //create instance with handler 
-            var instance = factory.Create<ITargetInterface>();
+            var instance = factory.Create<ITargetInterface>().AddRecorder();
 
             // not bound
 
@@ -153,8 +155,10 @@ namespace OoBDev.Oobtainium.Tests
             builder.Remove(a => a.ReturnValue());
             Assert.IsNull(instance.ReturnValue());
 
+
+            Assert.IsTrue(instance.TryGetRecorder(out var recorder));
+
             //get recording from proxy instance
-            var recorder = ((IHaveCallRecorder)instance).Recorder;
             foreach (var recoding in recorder)
                 this.TestContext.WriteLine(recoding?.ToString());
 

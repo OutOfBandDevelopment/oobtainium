@@ -2,6 +2,7 @@
 
 namespace OoBDev.Oobtainium.Tests.TestTargets
 {
+    [Lookup]
     public interface ITargetInterface
     {
         string this[int index] { get; set; }

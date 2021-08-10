@@ -54,7 +54,7 @@ jobs:
         echo "SANDBOX_PATH=$SANDBOX_PATH" >> $GITHUB_ENV 
         echo "TEST_RESULTS_PATH=$TEST_RESULTS_PATH" >> $GITHUB_ENV 
         echo "DOCS_PATH=$DOCS_PATH" >> $GITHUB_ENV 
-        echo "RESULTS_PATH=$RESULTS_PATH" >> $GITHUB_ENV        
+        echo "RESULTS_PATH=$RESULTS_PATH" >> $GITHUB_ENV   
 
     - name: Restore Project
       run: dotnet restore "$BUILD_PROJECT"
@@ -72,11 +72,27 @@ jobs:
       if: github.event_name != 'pull_request'
       run: dotnet nuget push "$OUTPUT_PATH/Nuget/*.nupkg" -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate
        
-    #- name: Build Coverage Report
-    #  run: dotnet reportgenerator "-reports:$TEST_RESULTS_PATH/**/coverage.cobertura.xml" "-targetDir:$RESULTS_PATH/Coverage" "-reportTypes:Xml" "-title:$BUILD_PROJECT - $buildVersion"
+    - name: Build Coverage Report
+      run: dotnet reportgenerator "-reports:$TEST_RESULTS_PATH/**/coverage.cobertura.xml" "-targetDir:$RESULTS_PATH/Coverage" "-reportTypes:Xml;HtmlInline;Cobertura" "-title:$BUILD_PROJECT - $buildVersion"
     #- name: Build Reports
     #  run: dotnet build "$REPORT_PROJECT" -f netcoreapp3.1 -p:PublishedBinaries=$RESULTS_PATH/Binary -p:SolutionDir=src -v n
-      
+    
+    ##https://github.com/marketplace/actions/git-tag-action
+    - name: Tag
+      if: github.event_name != 'pull_request'
+      uses: hole19/git-tag-action@master
+      env:
+        TAG: '${{env.buildVersion}}'
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    #- name: Update Documentation
+    #  if: github.event_name != 'pull_request'
+    #  run: rsync -r $DOCS_PATH docs
+    #  
+    #- name: Update Documentation
+    #  if: github.event_name != 'pull_request'
+    #  run: rsync -r $RESULTS_PATH/Coverage docs/CoverageReports
+    #
     ### If not   just attach the docs as an artifact
     #- name: Publish Documents
     #  if: github.ref != 'refs/heads/main'
@@ -84,27 +100,24 @@ jobs:
     #  with:
     #    name: OoBDev.Oobtainium_Documents
     #    path: Publish/docs/  
-    - name: Commit Tag
-      if: github.ref != 'refs/heads/main' && github.event_name != 'pull_request'
-      uses: EndBug/add-and-commit@v5
-      with:
-        #add: 'docs'
-        message: '${{env.buildVersion}} (${{env.dacVersion}})'
-        tag: '${{env.buildVersion}}'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #- name: Commit Tag
+    #  if: github.ref != 'refs/heads/main' && github.event_name != 'pull_request'
+    #  uses: EndBug/add-and-commit@v5
+    #  with:
+    #    add: 'docs'
+    #    message: '${{env.buildVersion}} (${{env.dacVersion}})'
+    #    tag: '${{env.buildVersion}}'
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     #    
     ## If main publish the docs
-    #- name: Update Documentation
+    #- name: Commit Documentation and Tag
     #  if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    #  run: rsync -r Publish/docs/ docs
-    - name: Commit Documentation and Tag
-      if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-      uses: EndBug/add-and-commit@v5
-      with:
-        #add: 'docs'
-        message: '${{env.buildVersion}} (${{env.dacVersion}})'
-        tag: '${{env.buildVersion}}'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
+    #  uses: EndBug/add-and-commit@v5
+    #  with:
+    #    add: 'docs'
+    #    message: '${{env.buildVersion}} (${{env.dacVersion}})'
+    #    tag: '${{env.buildVersion}}'
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #
