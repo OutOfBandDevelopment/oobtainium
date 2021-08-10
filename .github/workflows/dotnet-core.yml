@@ -79,7 +79,7 @@ jobs:
     
     ##https://github.com/marketplace/actions/git-tag-action
     - name: Tag
-      if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+      if: github.event_name != 'pull_request'
       uses: hole19/git-tag-action@master
       env:
         TAG: '${{env.buildVersion}}'
