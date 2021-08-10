@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OoBDev.Oobtainium.Composition;
 using OoBDev.Oobtainium.Recording;
 using OoBDev.Oobtainium.Tests.TestTargets;
 using System;
@@ -116,7 +117,7 @@ namespace OoBDev.Oobtainium.Tests
                     ;
 
             //create instance with handler 
-            var instance = factory.Create<ITargetInterface>(handler: new CallHandler(bindings.Store));
+            var instance = factory.Create<ITargetInterface>(handler: new CallHandler(bindings.Store)).AddRecorder();
 
             //test function
             var result = instance.ReturnValue();
@@ -124,11 +125,12 @@ namespace OoBDev.Oobtainium.Tests
             //assert
             Assert.AreEqual("Hello World", result);
 
-            //// TODO: fix this... in process of moving
-            ////get recording from proxy instance
-            //var recorder = ((IHaveCallRecorder)instance).Recorder;
-            //foreach (var recoding in recorder)
-            //    this.TestContext.WriteLine(recoding?.ToString());
+            if (instance.TryGetRecorder(out var recorder))
+            {
+                //get recording from proxy instance
+                foreach (var recoding in recorder)
+                    this.TestContext.WriteLine(recoding?.ToString());
+            }
         }
 
         [TestMethod, TestCategory(TestCategories.Unit)]

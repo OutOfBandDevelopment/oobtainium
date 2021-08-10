@@ -1,9 +1,9 @@
-﻿using OoBDev.Oobtainium.ComponentModel;
+﻿using OoBDev.Oobtainium.Reflection;
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.Composition
 {
     public class CallHandler : ICallHandler
     {

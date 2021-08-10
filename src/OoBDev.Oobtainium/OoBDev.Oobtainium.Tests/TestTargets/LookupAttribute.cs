@@ -2,7 +2,7 @@
 
 namespace OoBDev.Oobtainium.Tests.TestTargets
 {
-    public class LookupAttribute : Attribute
+    public sealed class LookupAttribute : Attribute
     {
     }
 }

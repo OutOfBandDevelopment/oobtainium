@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.Composition
 {
     public interface IBindingBuilder<S> : IHaveCallBindingStore
     {

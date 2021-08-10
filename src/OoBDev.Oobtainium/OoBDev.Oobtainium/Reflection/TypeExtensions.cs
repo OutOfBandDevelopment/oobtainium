@@ -4,18 +4,18 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OoBDev.Oobtainium.ComponentModel
+namespace OoBDev.Oobtainium.Reflection
 {
     public static class TypeExtensions
     {
-        public static object? GetDefaultValue(this Type type) =>
+        public static object? GetDefaultValue(this Type? type) =>
             type == null ? null :
             type == typeof(void) ? null :
             type.IsValueType ? Activator.CreateInstance(type) :
             null
             ;
 
-        public static object? ConvertOrDefault(this Type type, object? input)
+        public static object? ConvertOrDefault(this Type? type, object? input)
         {
             var task = input as Task;
             var captured = task?.GetResultOrDefault() ?? input;
@@ -33,7 +33,7 @@ namespace OoBDev.Oobtainium.ComponentModel
             {
                 var taskResultType = type.GetGenericArguments()[0];
                 var wrapped = taskResultType.ConvertOrDefault(captured);
-                return wrapped.AsTask();
+                return wrapped.AsTask(type);
             }
 
             return null;

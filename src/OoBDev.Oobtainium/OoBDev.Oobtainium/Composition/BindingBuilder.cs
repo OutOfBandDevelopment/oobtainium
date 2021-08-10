@@ -1,9 +1,10 @@
-﻿using System;
+﻿using OoBDev.Oobtainium.Reflection;
+using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.Composition
 {
     public static class BindingBuilderExtensions
     {

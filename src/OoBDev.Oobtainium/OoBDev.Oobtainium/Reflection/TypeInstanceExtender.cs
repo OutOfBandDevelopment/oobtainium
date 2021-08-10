@@ -22,7 +22,7 @@ namespace OoBDev.Oobtainium.Reflection
                 return module;
             }
         }
-        private static ConcurrentDictionary<string, Type> _types = new ConcurrentDictionary<string, Type>();
+        private static readonly ConcurrentDictionary<string, Type> _types = new ConcurrentDictionary<string, Type>();
         internal static Type AddInterfaceToInstanceType<T, TProxy>(object instance)
             where TProxy : DispatchProxy
         {

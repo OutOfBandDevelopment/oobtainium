@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using OoBDev.Oobtainium.ComponentModel;
+using OoBDev.Oobtainium.Reflection;
 using System;
 using System.Collections.Concurrent;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.Composition
 {
     public class CaptureProxy<I> : DispatchProxy, IHaveCallHandler, IHaveCallBindingStore
     {

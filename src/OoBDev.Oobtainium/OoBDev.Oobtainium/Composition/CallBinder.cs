@@ -1,4 +1,4 @@
-﻿namespace OoBDev.Oobtainium
+﻿namespace OoBDev.Oobtainium.Composition
 {
     public class CallBinder : ICallBinder, IHaveCallBindingStore
     {

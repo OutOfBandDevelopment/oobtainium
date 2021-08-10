@@ -2,22 +2,24 @@
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.Reflection
 {
     public static class TaskExtensions
     {
-        public static Task AsTask(this object? input)
+        public static Task AsTask(this object? input, Type? type = null)
         {
-            if (input == null) return Task.CompletedTask;
+            if (input == null && (type == null|| type == typeof(void))) return Task.CompletedTask;
+
             var task = typeof(Task)
                 .GetMethod(nameof(Task.FromResult), BindingFlags.Static | BindingFlags.Public)
-                ?.MakeGenericMethod(input.GetType())
-                ?.Invoke(null, new[] { input })
-                 as Task
+                ?.MakeGenericMethod(type ?? input?.GetType())
+                ?.Invoke(null, new[] { input ?? type.GetDefaultValue() })
+                as Task
                 ;
             if (task == null) return Task.FromException(new NullReferenceException("Unable to resolve Task.FromResult<>()"));
             return task;
         }
+
 
         public static object? GetResultOrDefault(this Task? task)
         {

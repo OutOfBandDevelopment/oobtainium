@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.Composition
 {
     /// <summary>
     /// Call handler allows for calling operations within the ICallBindingStore

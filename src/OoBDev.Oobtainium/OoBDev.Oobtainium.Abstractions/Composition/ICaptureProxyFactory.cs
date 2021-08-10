@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using OoBDev.Oobtainium.Recording;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.Composition
 {
     /// <summary>
     /// Capture Proxy Factory is used to generate a proxy class for a given interface

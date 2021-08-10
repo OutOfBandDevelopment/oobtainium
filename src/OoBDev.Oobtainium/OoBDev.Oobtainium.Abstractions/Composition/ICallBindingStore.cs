@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.Composition
 {
     /// <summary>
     /// ICallBindingStore is used for configuring callback and interception bindings on the proxy classes

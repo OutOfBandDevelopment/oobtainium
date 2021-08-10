@@ -2,7 +2,7 @@
 using OoBDev.Oobtainium.Recording;
 using System;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.Composition
 {
     public class CaptureProxyFactory : ICaptureProxyFactory
     {

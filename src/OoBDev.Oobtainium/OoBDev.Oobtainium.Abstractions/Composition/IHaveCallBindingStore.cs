@@ -1,6 +1,6 @@
 ﻿using OoBDev.Oobtainium.Recording;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium.Composition
 {
     [ExcludeFromRecording]
     public interface IHaveCallBindingStore

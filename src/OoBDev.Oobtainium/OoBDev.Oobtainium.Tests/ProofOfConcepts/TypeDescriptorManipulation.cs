@@ -22,7 +22,7 @@ namespace OoBDev.Oobtainium.Tests.ProofOfConcepts
             Assert.IsFalse(attributes.Any());
 
             // add attribute to type
-            var provider = TypeDescriptor.AddAttributes(typeof(ITargetInterface), new DisplayAttribute() { Name = "Test" });
+            _ = TypeDescriptor.AddAttributes(typeof(ITargetInterface), new DisplayAttribute() { Name = "Test" });
             TypeDescriptor.Refresh(target);
 
             //ensure attribute now exists

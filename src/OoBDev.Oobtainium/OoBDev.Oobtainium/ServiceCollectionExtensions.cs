@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OoBDev.Oobtainium.Composition;
 using OoBDev.Oobtainium.Recording;
 
 namespace OoBDev.Oobtainium
@@ -12,7 +13,6 @@ namespace OoBDev.Oobtainium
         /// <returns></returns>
         public static IServiceCollection AddOobtainium(this IServiceCollection services) => services
                 .AddScoped<ICallRecorder, CallRecorder>()
-
                 .AddTransient<ICallRecorderFactory, CallRecorderFactory>()
                 .AddTransient<ICallRecorderProxyFactory, CallRecorderProxyFactory>()
 

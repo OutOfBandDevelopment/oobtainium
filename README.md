@@ -71,3 +71,4 @@ Simplified example
 [![NuGet](https://img.shields.io/github/followers/mwwhited?style=social)](https://github.com/OutOfBandDevelopment)
 [![NuGet](https://img.shields.io/github/forks/OutOfBandDevelopment/oobtainium?label=Fork&style=social)](https://github.com/OutOfBandDevelopment/oobtainium/network/members)
 [![NuGet](https://img.shields.io/github/stars/OutOfBandDevelopment/oobtainium?style=social)](https://github.com/OutOfBandDevelopment/oobtainium/stargazers)
+[![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/company/out-of-band-development-llc/)

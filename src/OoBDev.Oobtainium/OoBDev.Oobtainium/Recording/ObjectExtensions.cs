@@ -1,4 +1,4 @@
-﻿using OoBDev.Oobtainium.ComponentModel;
+﻿using OoBDev.Oobtainium.Reflection;
 using System;
 using System.Reflection;
 
@@ -15,7 +15,7 @@ namespace OoBDev.Oobtainium.Recording
         public static T AddRecorder<T>(this T instance, ICallRecorderFactory factory) =>
             CallRecorderProxyFactory.InternalAddRecorder(instance, factory: factory ?? throw new ArgumentNullException(nameof(factory)));
 
-        public static bool TryGetRecorder<T>(this T instance, out ICallRecorder recorder)
+        public static bool TryGetRecorder<T>(this T instance, out ICallRecorder? recorder)
         {
             if (instance is IHaveCallRecorder have)
             {

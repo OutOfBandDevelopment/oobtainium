@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OoBDev.Oobtainium.Tests
+﻿namespace OoBDev.Oobtainium.Tests
 {
+#pragma warning disable CA1034 // Nested types should not be visible
     public static class TestCategories
     {
         public const string Unit = nameof(Unit);
@@ -31,4 +28,5 @@ namespace OoBDev.Oobtainium.Tests
             public const string Reflection = nameof(Reflection);
         }
     }
+#pragma warning restore CA1034 // Nested types should not be visible
 }

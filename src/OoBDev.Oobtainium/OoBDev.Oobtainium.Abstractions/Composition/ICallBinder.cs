@@ -1,4 +1,4 @@
-﻿namespace OoBDev.Oobtainium
+﻿namespace OoBDev.Oobtainium.Composition
 {
     /// <summary>
     /// Entry point for configuring service bindings. 
