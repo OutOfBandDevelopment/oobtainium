@@ -16,7 +16,7 @@ namespace OoBDev.Oobtainium
                 .AddTransient<ICallRecorderFactory, CallRecorderFactory>()
                 .AddTransient<ICallRecorderProxyFactory, CallRecorderProxyFactory>()
 
-                .AddTransient<ICaptureProxyFactory, CaptureProxyFactory>()
+                .AddTransient<ICallHandlerProxyFactory, CallHandlerProxyFactory>()
                 .AddTransient<ICallBinder, CallBinder>()
                 .AddTransient<ICallHandler, CallHandler>()
             ;

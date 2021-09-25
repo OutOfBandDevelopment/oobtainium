@@ -32,12 +32,12 @@ namespace OoBDev.Oobtainium.Tests
                 //.AddTransient<ICallHandler, CallHandler>()
 
                 //setup mocked interface in IOC
-                .AddTransient(sp => sp.GetRequiredService<ICaptureProxyFactory>().Create<IAnotherInterface>())
+                .AddTransient(sp => sp.GetRequiredService<ICallHandlerProxyFactory>().Create<IAnotherInterface>())
 
                 ;
             var sp = services.BuildServiceProvider();
 
-            var factory = sp.GetRequiredService<ICaptureProxyFactory>();
+            var factory = sp.GetRequiredService<ICallHandlerProxyFactory>();
 
             // configure binding interceptions
             var binder = sp.GetRequiredService<ICallBinder>()
@@ -108,7 +108,7 @@ namespace OoBDev.Oobtainium.Tests
         [TestMethod, TestCategory(TestCategories.Unit)]
         public void SimpleTest()
         {
-            var factory = new CaptureProxyFactory();
+            var factory = new CallHandlerProxyFactory();
 
             //mock out method response
             var bindings = new CallBinder()
@@ -136,7 +136,7 @@ namespace OoBDev.Oobtainium.Tests
         [TestMethod, TestCategory(TestCategories.Unit)]
         public void OnAgainOffAgainTest()
         {
-            var factory = new CaptureProxyFactory();
+            var factory = new CallHandlerProxyFactory();
 
             //create instance with handler 
             var instance = factory.Create<ITargetInterface>().AddRecorder();

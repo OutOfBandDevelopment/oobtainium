@@ -6,7 +6,7 @@ namespace OoBDev.Oobtainium.Composition
     /// <summary>
     /// Capture Proxy Factory is used to generate a proxy class for a given interface
     /// </summary>
-    public interface ICaptureProxyFactory
+    public interface ICallHandlerProxyFactory
     {
         /// <summary>
         /// This method allows for creating a dynamic proxy class for the provided interface

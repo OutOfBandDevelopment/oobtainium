@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OoBDev.Oobtainium.Composition
 {
-    public class CaptureProxy<I> : DispatchProxy, IHaveCallHandler, IHaveCallBindingStore
+    public class CallHandlerProxy<I> : DispatchProxy, IHaveCallHandler, IHaveCallBindingStore
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         private ICallHandler _handler;
@@ -138,10 +138,10 @@ namespace OoBDev.Oobtainium.Composition
             ILogger<I>? logger = null
             )
         {
-            object? proxy = Create<I, CaptureProxy<I>>();
+            object? proxy = Create<I, CallHandlerProxy<I>>();
             if (proxy != null)
             {
-                var unwrapped = (CaptureProxy<I>)proxy;
+                var unwrapped = (CallHandlerProxy<I>)proxy;
                 unwrapped._handler = handler ?? new CallHandler();
                 unwrapped._logger = logger;
             }
