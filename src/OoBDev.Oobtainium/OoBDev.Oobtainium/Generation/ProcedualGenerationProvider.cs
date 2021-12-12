@@ -15,7 +15,9 @@ namespace OoBDev.Oobtainium.Generation
         static ProcedualGenerationProvider()
         {
             TypeDescriptor.AddAttributes(typeof(object), new GenerateObjectAttribute());
+
             TypeDescriptor.AddAttributes(typeof(Enum), new GenerateEnumerationAttribute());
+            TypeDescriptor.AddAttributes(typeof(object), new GenerateArrayAttribute());
 
             TypeDescriptor.AddAttributes(typeof(byte), new GenerateIntegerAttribute());
             TypeDescriptor.AddAttributes(typeof(byte?), new GenerateIntegerAttribute());
@@ -50,46 +52,15 @@ namespace OoBDev.Oobtainium.Generation
             TypeDescriptor.AddAttributes(typeof(Guid?), new GenerateGuidAttribute());
 
             TypeDescriptor.AddAttributes(typeof(string), new GenerateStringAttribute());
-            
+
             //TODO: interface support
             //TODO: abstract support
             //TODO: array (typed)
             //TODO: array of objects (object[])
             //TODO: collection, list support
             //TODO: dictionary support
+            //TODO: random data object
         }
-
-        #region Overloads 
-
-        public IProcedualGenerationContext CreateContext(Type type)
-            => CreateContext(null, type, Enumerable.Empty<Attribute>());
-        public IProcedualGenerationContext CreateContext(Type type, IEnumerable<Attribute> attributes)
-            => CreateContext(null, type, attributes);
-        public IProcedualGenerationContext CreateContext(MethodBase method)
-            => CreateContext(null, method, Array.Empty<object>(), Enumerable.Empty<Attribute>());
-        public IProcedualGenerationContext CreateContext(MethodBase method, IEnumerable<Attribute> attributes)
-            => CreateContext(null, method, attributes);
-        public IProcedualGenerationContext CreateContext(MethodBase method, object[] args)
-            => CreateContext(null, method, Enumerable.Empty<Attribute>());
-        public IProcedualGenerationContext CreateContext(MethodBase method, object[] args, IEnumerable<Attribute> attributes)
-            => CreateContext(null, method, args, attributes);
-
-        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext context, Type type)
-            => CreateContext(context, type, Enumerable.Empty<Attribute>());
-        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext context, MethodBase method)
-            => CreateContext(context, method, Enumerable.Empty<Attribute>());
-        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext context, MethodBase method, IEnumerable<Attribute> attributes)
-            => CreateContext(context, method, Array.Empty<object>(), Enumerable.Empty<Attribute>());
-        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext context, MethodBase method, object[] args)
-            => CreateContext(context, method, args, Enumerable.Empty<Attribute>());
-
-        #endregion Overloads 
-
-        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext? context, Type type, IEnumerable<Attribute> attributes)
-            => ContextBuilder.CreateContext(this, context, type, attributes);
-
-        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext? context, MethodBase method, object[] args, IEnumerable<Attribute> attributes)
-            => ContextBuilder.CreateContext(this, context, method, args, attributes);
 
         public object? Generate(IProcedualGenerationContext context) =>
             (
@@ -103,5 +74,64 @@ namespace OoBDev.Oobtainium.Generation
                orderby g.Priority
                where g.CanGenerateValue(context)
                select g;
+
+
+        #region Overloads 
+
+        public IProcedualGenerationContext CreateContext(Type type)
+            => CreateContext(null, 0, type, Enumerable.Empty<Attribute>());
+        public IProcedualGenerationContext CreateContext(Type type, IEnumerable<Attribute> attributes)
+            => CreateContext(null, 0, type, attributes);
+        public IProcedualGenerationContext CreateContext(int index, Type type)
+            => CreateContext(null, index, type, Enumerable.Empty<Attribute>());
+        public IProcedualGenerationContext CreateContext(int index, Type type, IEnumerable<Attribute> attributes)
+            => CreateContext(null, index, type, attributes);
+
+        public IProcedualGenerationContext CreateContext(MethodBase method)
+            => CreateContext(null, 0, method, Array.Empty<object>(), Enumerable.Empty<Attribute>());
+        public IProcedualGenerationContext CreateContext(MethodBase method, IEnumerable<Attribute> attributes)
+            => CreateContext(null, 0, method, attributes);
+        public IProcedualGenerationContext CreateContext(MethodBase method, object[] args)
+            => CreateContext(null, 0, method, Enumerable.Empty<Attribute>());
+        public IProcedualGenerationContext CreateContext(MethodBase method, object[] args, IEnumerable<Attribute> attributes)
+            => CreateContext(null, 0, method, args, attributes);
+        public IProcedualGenerationContext CreateContext(int index, MethodBase method)
+            => CreateContext(null, index, method, Array.Empty<object>(), Enumerable.Empty<Attribute>());
+        public IProcedualGenerationContext CreateContext(int index, MethodBase method, IEnumerable<Attribute> attributes)
+            => CreateContext(null, index, method, Array.Empty<object>(), attributes);
+        public IProcedualGenerationContext CreateContext(int index, MethodBase method, object[] args)
+            => CreateContext(null, index, method, args, Enumerable.Empty<Attribute>());
+        public IProcedualGenerationContext CreateContext(int index, MethodBase method, object[] args, IEnumerable<Attribute> attributes)
+            => CreateContext(null, index, method, args, Enumerable.Empty<Attribute>());
+
+        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext context, Type type)
+            => CreateContext(context, 0, type, Enumerable.Empty<Attribute>());
+        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext? context, Type type, IEnumerable<Attribute> attributes)
+            => CreateContext(context, 0, type, attributes);
+        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext context, int index, Type type)
+            => CreateContext(context, index, type, Enumerable.Empty<Attribute>());
+        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext context, MethodBase method)
+            => CreateContext(context, 0, method, Enumerable.Empty<Attribute>());
+        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext context, MethodBase method, IEnumerable<Attribute> attributes)
+            => CreateContext(context, 0, method, Array.Empty<object>(), Enumerable.Empty<Attribute>());
+        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext context, MethodBase method, object[] args)
+            => CreateContext(context, 0, method, args, Enumerable.Empty<Attribute>());
+        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext? context, MethodBase method, object[] args, IEnumerable<Attribute> attributes)
+                    => CreateContext(context, 0, method, args, attributes);
+        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext context, int index, MethodBase method)
+            => CreateContext(context, 0, method, Array.Empty<object>(), Enumerable.Empty<Attribute>());
+        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext context, int index, MethodBase method, IEnumerable<Attribute> attributes)
+            => CreateContext(context, 0, method, Array.Empty<object>(), Enumerable.Empty<Attribute>());
+        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext context, int index, MethodBase method, object[] args)
+            => CreateContext(context, 0, method, args, Enumerable.Empty<Attribute>());
+
+        #endregion Overloads 
+
+
+        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext context, int index, Type type, IEnumerable<Attribute> attributes)
+             => ContextBuilder.CreateContext(this, context, index, type, attributes);
+
+        public IProcedualGenerationContext CreateContext(IProcedualGenerationContext context, int index, MethodBase method, object[] args, IEnumerable<Attribute> attributes)
+            => ContextBuilder.CreateContext(this, context, index, method, args, attributes);
     }
 }

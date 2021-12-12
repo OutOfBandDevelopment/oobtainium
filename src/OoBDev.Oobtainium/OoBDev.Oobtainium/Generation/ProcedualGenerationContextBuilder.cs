@@ -19,11 +19,12 @@ namespace OoBDev.Oobtainium.Generation
         public IProcedualGenerationContext CreateContext(
             IProcedualGenerationProvider provider,
             IProcedualGenerationContext? context,
+            int index,
             Type type,
             IEnumerable<Attribute> attributes
             )
             => new ProcedualGenerationContext(
-                seed: SeedGenerator.Generate(seed: context?.Seed ?? 0, type: type),
+                seed: SeedGenerator.Generate(context?.Seed ?? 0, index, type),
                 targetType: type,
                 reference: type,
                 parameters: Enumerable.Empty<object>(),
@@ -35,12 +36,13 @@ namespace OoBDev.Oobtainium.Generation
         public IProcedualGenerationContext CreateContext(
             IProcedualGenerationProvider provider,
             IProcedualGenerationContext? context,
+            int index,
             MethodBase method,
             object[] arguments,
             IEnumerable<Attribute> attributes
             )
             => new ProcedualGenerationContext(
-                seed: SeedGenerator.Generate(seed: context?.Seed ?? 0, method: method, arguments: arguments),
+                seed: SeedGenerator.Generate(context?.Seed ?? 0, index, method, arguments),
                 targetType: method switch
                 {
                     MethodInfo m => m.ReturnType,

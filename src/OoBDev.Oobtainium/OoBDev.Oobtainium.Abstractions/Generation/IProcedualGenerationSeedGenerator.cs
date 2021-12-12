@@ -5,7 +5,7 @@ namespace OoBDev.Oobtainium.Generation
 {
     public interface IProcedualGenerationSeedGenerator
     {
-        int Generate(int seed, MethodBase method, object[] arguments);
-        int Generate(int seed, Type type);
+        int Generate(int seed, int index, MethodBase method, object[] arguments);
+        int Generate(int seed, int index, Type type);
     }
 }

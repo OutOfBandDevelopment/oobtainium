@@ -31,7 +31,7 @@ namespace OoBDev.Oobtainium.Generation
             Attributes = attributes ?? Enumerable.Empty<Attribute>();
 
             Parent = parent;
-            if (parent is ProcedualGenerationContext same && !same._children.Contains(this)) 
+            if (parent is ProcedualGenerationContext same) // && !same._children.Contains(this)) 
                 same._children.Add(this);
         }
 
