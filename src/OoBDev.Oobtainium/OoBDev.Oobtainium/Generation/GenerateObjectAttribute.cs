@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -10,7 +11,13 @@ namespace OoBDev.Oobtainium.Generation
         public int Priority { get; set; } = DefaultPriority;
         public override object TypeId => this;
 
-        public bool CanGenerateValue(IProcedualGenerationContext context) => true;
+        public bool CanGenerateValue(IProcedualGenerationContext context) =>
+            !context.TargetType.IsInterface &&
+            !context.TargetType.IsAbstract &&
+            !context.TargetType.IsEnum &&
+            !context.TargetType.IsPrimitive &&
+            !context.TargetType.IsArray
+            ;
 
         public virtual object? GenerateValue(IProcedualGenerationContext context)
         {
@@ -26,7 +33,7 @@ namespace OoBDev.Oobtainium.Generation
             var obj = ctor switch
             {
                 null => Activator.CreateInstance(context.TargetType),
-                _ => ctor.Invoke(GenerateArguments(context.Provider.CreateContext(context, ctor, ctor.GetCustomAttributes()), ctor.GetParameters()))
+                _ => ctor.Invoke(GenerateArguments(context.Provider.CreateContext(context, ctor, ctor.GetCustomAttributes()), ctor.GetParameters(), Enumerable.Empty<Attribute>()))
             };
 
             //update setable properties
@@ -35,8 +42,9 @@ namespace OoBDev.Oobtainium.Generation
                 var setter = property.GetSetMethod();
                 if (setter != null)
                 {
-                    var setterContext = context.Provider.CreateContext(context, ctor, ctor.GetCustomAttributes());
-                    setter.Invoke(obj, GenerateArguments(setterContext, setter.GetParameters()));
+                    var setterAttributes = property.GetCustomAttributes().Concat(setter.GetCustomAttributes());
+                    var setterContext = context.Provider.CreateContext(context, setter, setterAttributes);
+                    setter.Invoke(obj, GenerateArguments(setterContext, setter.GetParameters(), setterAttributes));
                 }
             }
 
@@ -51,14 +59,15 @@ namespace OoBDev.Oobtainium.Generation
             return obj;
         }
 
-        internal object?[] GenerateArguments(IProcedualGenerationContext context, ParameterInfo[] parameters)
+        internal object?[] GenerateArguments(IProcedualGenerationContext context, ParameterInfo[] parameters, IEnumerable<Attribute> attributes)
         {
             var arguments = new object?
                 [parameters.Length];
             for (var i = 0; i < parameters.Length; i++)
             {
                 var parameter = parameters[i];
-                var nestedContext = context.Provider.CreateContext(context, parameter.ParameterType, parameter.GetCustomAttributes());
+                var parameterAttributes = attributes.Concat(parameter.GetCustomAttributes());
+                var nestedContext = context.Provider.CreateContext(context, parameter.ParameterType, parameterAttributes);
                 var value = context.Provider.Generate(nestedContext);
                 arguments[i] = value;
             }

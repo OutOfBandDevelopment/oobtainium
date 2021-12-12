@@ -15,6 +15,7 @@ namespace OoBDev.Oobtainium.Generation
         static ProcedualGenerationProvider()
         {
             TypeDescriptor.AddAttributes(typeof(object), new GenerateObjectAttribute());
+            TypeDescriptor.AddAttributes(typeof(Enum), new GenerateEnumerationAttribute());
 
             TypeDescriptor.AddAttributes(typeof(byte), new GenerateIntegerAttribute());
             TypeDescriptor.AddAttributes(typeof(byte?), new GenerateIntegerAttribute());
@@ -52,7 +53,9 @@ namespace OoBDev.Oobtainium.Generation
             
             //TODO: interface support
             //TODO: abstract support
-            //TODO: array, collection, list support
+            //TODO: array (typed)
+            //TODO: array of objects (object[])
+            //TODO: collection, list support
             //TODO: dictionary support
         }
 
@@ -91,7 +94,8 @@ namespace OoBDev.Oobtainium.Generation
         public object? Generate(IProcedualGenerationContext context) =>
             (
                 GetGenerators(context, context.Attributes).FirstOrDefault() ??
-                GetGenerators(context, TypeDescriptor.GetAttributes(context.TargetType).OfType<Attribute>()).FirstOrDefault()
+                GetGenerators(context, TypeDescriptor.GetAttributes(context.TargetType).OfType<Attribute>()).FirstOrDefault() ??
+                throw new NotSupportedException($@"""{context.TargetType}"" is not supported")
             ).GenerateValue(context);
 
         internal IEnumerable<IGenerateObject> GetGenerators(IProcedualGenerationContext context, IEnumerable<Attribute> attributes)

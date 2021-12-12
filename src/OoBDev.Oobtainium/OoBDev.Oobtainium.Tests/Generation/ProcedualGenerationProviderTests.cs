@@ -18,10 +18,10 @@ namespace OoBDev.Oobtainium.Tests.Generation
             var provider = new ProcedualGenerationProviderBuilder().Build();
 
             // Act
-            for (var x = 0; x < 2; x++)
+            for (var x = 0; x < 1; x++)
             {
                 var context = provider.CreateContext(typeof(ModelWithProperties));
-                for (var y = 0; y < 2; y++)
+                for (var y = 0; y < 1; y++)
                 {
                     var result = provider.Generate(context);
                     var json = JsonSerializer.Serialize(result);
@@ -30,10 +30,10 @@ namespace OoBDev.Oobtainium.Tests.Generation
                 }
             }
 
-            for (var x = 0; x < 2; x++)
+            for (var x = 0; x < 1; x++)
             {
                 var context = provider.CreateContext(typeof(ModelWithProperties2));
-                for (var y = 0; y < 2; y++)
+                for (var y = 0; y < 1; y++)
                 {
                     var result = provider.Generate(context);
                     var json = JsonSerializer.Serialize(result);
@@ -42,10 +42,10 @@ namespace OoBDev.Oobtainium.Tests.Generation
                 }
             }
 
-            for (var x = 0; x < 2; x++)
+            for (var x = 0; x < 1; x++)
             {
                 var context = provider.CreateContext(typeof(ModelWithProperties3));
-                for (var y = 0; y < 2; y++)
+                for (var y = 0; y < 1; y++)
                 {
                     var result = provider.Generate(context);
                     var json = JsonSerializer.Serialize(result);

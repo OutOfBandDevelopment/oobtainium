@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace OoBDev.Oobtainium.Generation
@@ -24,7 +25,8 @@ namespace OoBDev.Oobtainium.Generation
             => new ProcedualGenerationContext(
                 seed: SeedGenerator.Generate(seed: context?.Seed ?? 0, type: type),
                 targetType: type,
-                relation: type,
+                reference: type,
+                parameters: Enumerable.Empty<object>(),
                 attributes: attributes,
                 parent: context,
                 provider: provider
@@ -46,7 +48,8 @@ namespace OoBDev.Oobtainium.Generation
 
                     _ => throw new NotSupportedException($"")
                 },
-                relation: new { method, arguments },
+                reference: method,
+                parameters: arguments,
                 attributes: method.GetCustomAttributes(),
                 parent: context,
                 provider: provider

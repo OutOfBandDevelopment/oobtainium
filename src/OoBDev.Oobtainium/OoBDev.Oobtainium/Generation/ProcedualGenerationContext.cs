@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace OoBDev.Oobtainium.Generation
 {
@@ -11,7 +12,8 @@ namespace OoBDev.Oobtainium.Generation
         public ProcedualGenerationContext(
             int seed,
             Type targetType,
-            object relation,
+            object reference,
+            IEnumerable<object> parameters,
             IEnumerable<Attribute> attributes,
             IProcedualGenerationContext? parent,
             IProcedualGenerationProvider provider
@@ -20,14 +22,17 @@ namespace OoBDev.Oobtainium.Generation
             Seed = seed;
             Random = new Random(seed);
             TargetType = targetType;
-            Relation = relation;
+
+            Reference = reference;
+            Parameters = parameters?.ToList().AsReadOnly() ?? Enumerable.Empty<object>();
 
             Provider = provider;
 
             Attributes = attributes ?? Enumerable.Empty<Attribute>();
 
             Parent = parent;
-            if (parent is ProcedualGenerationContext same) same._children.Add(this);
+            if (parent is ProcedualGenerationContext same && !same._children.Contains(this)) 
+                same._children.Add(this);
         }
 
         public int Seed { get; }
@@ -36,9 +41,9 @@ namespace OoBDev.Oobtainium.Generation
         public IEnumerable<Attribute> Attributes { get; }
         public IProcedualGenerationContext? Parent { get; }
         public IProcedualGenerationProvider Provider { get; }
-        public object Relation { get; }
-        public IEnumerable<IProcedualGenerationContext> Children => _children.AsReadOnly();
+        public object Reference { get; }
+        public IEnumerable<object> Parameters { get; }
 
-        public override int GetHashCode() => HashCode.Combine(Seed, TargetType, Parent);
+        public IEnumerable<IProcedualGenerationContext> Children => _children.AsReadOnly();
     }
 }

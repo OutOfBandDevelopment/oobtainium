@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -12,7 +11,7 @@ namespace OoBDev.Oobtainium.Generation
                 typeof(string),
             }.Contains(context.TargetType);
 
-        protected override object? OnGenerateValue( IProcedualGenerationContext context)
+        protected override object? OnGenerateValue(IProcedualGenerationContext context)
         {
             // https://stackoverflow.com/questions/4286487/is-there-any-lorem-ipsum-generator-in-c
             var words = new[]{
@@ -20,6 +19,8 @@ namespace OoBDev.Oobtainium.Generation
                 "adipiscing", "elit", "sed", "diam", "nonummy", "nibh", "euismod",
                 "tincidunt", "ut", "laoreet", "dolore", "magna", "aliquam", "erat"
             };
+            //TODO: add random capitalization
+            //TODO: update so you can passing an array of strings to seed with
 
             int minWords = 1, maxWords = 5,
                  minSentences = 1, maxSentences = 5,
