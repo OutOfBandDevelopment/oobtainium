@@ -45,8 +45,11 @@ namespace OoBDev.Oobtainium.Generation
             TypeDescriptor.AddAttributes(typeof(float), new GenerateDoubleAttribute());
             TypeDescriptor.AddAttributes(typeof(float?), new GenerateDoubleAttribute());
 
-            TypeDescriptor.AddAttributes(typeof(string), new GenerateStringAttribute());
+            TypeDescriptor.AddAttributes(typeof(Guid), new GenerateGuidAttribute());
+            TypeDescriptor.AddAttributes(typeof(Guid?), new GenerateGuidAttribute());
 
+            TypeDescriptor.AddAttributes(typeof(string), new GenerateStringAttribute());
+            
             //TODO: interface support
             //TODO: abstract support
             //TODO: array, collection, list support
