@@ -5,30 +5,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace OoBDev.Oobtainium.Recording
+namespace OoBDev.Oobtainium.Recording;
+
+public class CallRecorder : ICallRecorder
 {
-    public class CallRecorder : ICallRecorder
+    private readonly ILogger<ICallRecorder>? _log;
+    private readonly SynchronizedCollection<IRecordedCall> _calls = [];
+
+    public CallRecorder(ILogger<ICallRecorder>? log = null)
     {
-        private readonly ILogger<ICallRecorder>? _log;
-        private readonly SynchronizedCollection<IRecordedCall> _calls = new SynchronizedCollection<IRecordedCall>();
+        _log = log;
+        Capture = RecordCall;
+    }
 
-        public CallRecorder(ILogger<ICallRecorder>? log = null)
-        {
-            _log = log;
-            Capture = RecordCall;
-        }
+    public CaptureHandler Capture { get; }
 
-        public CaptureHandler Capture { get; }
+    public void Clear() => _calls.Clear();
 
-        public void Clear() => _calls.Clear();
+    public IEnumerator<IRecordedCall> GetEnumerator() => _calls.GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => _calls.GetEnumerator();
 
-        public IEnumerator<IRecordedCall> GetEnumerator() => _calls.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => _calls.GetEnumerator();
-
-        private void RecordCall(object instance, Type instanceAs, MethodInfo method, object[] arguments, object? response)
-        {
-            _log?.LogDebug($"{instance} as {instanceAs}: {method.Name}({string.Join(';', arguments.Select(i => i))}) => {response}");
-            _calls.Add(new RecordedCall(instance, instanceAs, method, arguments, response));
-        }
+    private void RecordCall(object instance, Type instanceAs, MethodInfo method, object[] arguments, object? response)
+    {
+        _log?.LogDebug($"{instance} as {instanceAs}: {method.Name}({string.Join(';', arguments.Select(i => i))}) => {response}");
+        _calls.Add(new RecordedCall(instance, instanceAs, method, arguments, response));
     }
 }

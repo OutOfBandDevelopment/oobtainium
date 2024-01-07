@@ -1,10 +1,9 @@
 ﻿using OoBDev.Oobtainium.Recording;
 
-namespace OoBDev.Oobtainium
+namespace OoBDev.Oobtainium;
+
+[ExcludeFromRecording]
+public interface IHaveCallHandler
 {
-    [ExcludeFromRecording]
-    public interface IHaveCallHandler
-    {
-        ICallHandler Handler { get; }
-    }
+    ICallHandler Handler { get; }
 }
