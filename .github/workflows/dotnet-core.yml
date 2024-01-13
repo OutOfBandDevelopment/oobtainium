@@ -26,10 +26,10 @@ jobs:
     #  uses: actions/setup-dotnet@v1
     #  with:
     #    dotnet-version: 5.0.x
-    - name: Setup .NET Core 3.1
+    - name: Setup .NET Core 8.0
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.x
+        dotnet-version: 8.0.x
         
     - name: Setup Project Variables
       run: |
@@ -37,8 +37,8 @@ jobs:
         TEST_RESULTS_PATH=$OUTPUT_PATH/TestResults
         DOCS_PATH=$OUTPUT_PATH/docs
         RESULTS_PATH=$OUTPUT_PATH/Results     
-        BUILD_PROJECT=src/OoBDev.Oobtainium/OoBDev.Oobtainium.sln
-        REPORT_PROJECT=src/OoBDev.Oobtainium/OoBDev.Oobtainium.rptproj
+        BUILD_PROJECT=src/Oobtainium.sln
+        REPORT_PROJECT=src/Oobtainium.rptproj
         BUILD_CONFIGURATION=Release
         dotnet tool restore
         buildVersion=`dotnet gitversion /output json /showvariable FullSemVer`

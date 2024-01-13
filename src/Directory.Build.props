@@ -14,6 +14,8 @@
     <ImplicitUsings>false</ImplicitUsings>
     <Nullable>enable</Nullable>
 
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
     <IsAbstractionProject>$(MSBuildProjectName.EndsWith('.Abstractions'))</IsAbstractionProject>
     <IsTestProject>$(MSBuildProjectName.EndsWith('.Tests'))</IsTestProject>
     <IsDatabaseProject>$(MSBuildProjectName.EndsWith('.Database'))</IsDatabaseProject>
