@@ -1,7 +1,6 @@
-﻿using OoBDev.Oobtainium.IO.Ports;
-using System;
+﻿using System;
 
-namespace BinaryDataDecoders.IO.Ports;
+namespace OoBDev.Oobtainium.IO.Ports;
 
 public static class BridgeExtensions
 {

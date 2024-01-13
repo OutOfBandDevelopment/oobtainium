@@ -18,6 +18,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Oobtainium.TestUtilities\Oobtainium.TestUtilities.csproj" />
 		<ProjectReference Include="..\..\Oobtainium\Oobtainium.csproj" />
 		<ProjectReference Include="..\Oobtainium.IO.Pipelines\Oobtainium.IO.Pipelines.csproj" />
 		<ProjectReference Include="..\Oobtainium.IO.Ports\Oobtainium.IO.Ports.csproj" />

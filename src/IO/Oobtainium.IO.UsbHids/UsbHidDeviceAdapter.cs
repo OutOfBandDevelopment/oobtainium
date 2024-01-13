@@ -1,9 +1,8 @@
 ﻿using HidSharp;
-using OoBDev.Oobtainium.IO;
 using System;
 using System.IO;
 
-namespace BinaryDataDecoders.IO.UsbHids;
+namespace OoBDev.Oobtainium.IO.UsbHids;
 
 public class UsbHidDeviceAdapter(HidDevice device) : IDeviceAdapter
 {

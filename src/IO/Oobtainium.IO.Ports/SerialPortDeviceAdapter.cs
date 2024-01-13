@@ -1,8 +1,7 @@
-﻿using OoBDev.Oobtainium.IO;
-using System.IO;
+﻿using System.IO;
 using SerialPort = System.IO.Ports.SerialPort;
 
-namespace BinaryDataDecoders.IO.Ports;
+namespace OoBDev.Oobtainium.IO.Ports;
 
 //TODO: this should be disposable so it can be cleaned up correctly
 public class SerialPortDeviceAdapter(SerialPort device) : IBufferedDeviceAdapter

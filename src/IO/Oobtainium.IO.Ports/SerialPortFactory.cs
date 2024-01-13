@@ -1,12 +1,10 @@
-﻿using OoBDev.Oobtainium.IO;
-using OoBDev.Oobtainium.IO.Ports;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using SerialPort = System.IO.Ports.SerialPort;
 
-namespace BinaryDataDecoders.IO.Ports;
+namespace OoBDev.Oobtainium.IO.Ports;
 
 
 [DeviceTarget(typeof(SerialPortAttribute))]

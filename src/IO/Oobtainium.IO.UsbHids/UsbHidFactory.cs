@@ -1,12 +1,10 @@
 ﻿using HidSharp;
-using OoBDev.Oobtainium.IO;
-using OoBDev.Oobtainium.IO.UsbHids;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace BinaryDataDecoders.IO.UsbHids;
+namespace OoBDev.Oobtainium.IO.UsbHids;
 
 [DeviceTarget(typeof(UsbHidAttribute))]
 public class UsbHidFactory : IImplictDeviceFactory
@@ -20,10 +18,12 @@ public class UsbHidFactory : IImplictDeviceFactory
 
     public IEnumerable<IDeviceAdapter> GetDevices(object? definition)
     {
-        if (definition == null) yield break;
+        if (definition == null)
+            yield break;
         var def = definition.GetType();
         var config = def.GetCustomAttribute<UsbHidAttribute>();
-        if (config == null) yield break;
+        if (config == null)
+            yield break;
 
         var devices = from device in DeviceList.Local.GetAllDevices().OfType<HidDevice>()
                       where device.VendorID == config.VendorId
