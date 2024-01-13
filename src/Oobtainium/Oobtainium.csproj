@@ -16,6 +16,9 @@
       <Listener>false</Listener>
       <Visitor>true</Visitor>
     </Antlr4>
+    <Antlr4 Include="ExpressionCalculator\Parser\ExpressionTree.g4">
+      <Listener>false</Listener>
+    </Antlr4>
   </ItemGroup>
 
   <ItemGroup>
@@ -26,8 +29,4 @@
     <PackageReference Include="Antlr4BuildTasks" Version="12.7.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Retro\Apple2\" />
-  </ItemGroup>
-  
 </Project>
