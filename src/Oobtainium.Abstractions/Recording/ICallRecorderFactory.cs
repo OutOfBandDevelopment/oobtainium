@@ -1,7 +1,6 @@
-﻿namespace OoBDev.Oobtainium.Recording
+﻿namespace OoBDev.Oobtainium.Recording;
+
+public interface ICallRecorderFactory
 {
-    public interface ICallRecorderFactory
-    {
-        ICallRecorder Create();
-    }
+    ICallRecorder Create();
 }

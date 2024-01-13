@@ -1,10 +1,9 @@
-﻿namespace OoBDev.Oobtainium
+﻿namespace OoBDev.Oobtainium;
+
+/// <summary>
+/// Entry point for configuring service bindings. 
+/// </summary>
+public interface ICallBinder
 {
-    /// <summary>
-    /// Entry point for configuring service bindings. 
-    /// </summary>
-    public interface ICallBinder
-    {
-        IBindingBuilder<T> Build<T>();
-    }
+    IBindingBuilder<T> Build<T>();
 }

@@ -1,8 +1,7 @@
-﻿namespace OoBDev.Oobtainium.Recording
+﻿namespace OoBDev.Oobtainium.Recording;
+
+public interface ICallRecorderProxyFactory
 {
-    public interface ICallRecorderProxyFactory
-    {
-        T AddRecorder<T>(T instance);
-        T AttachRecorder<T>(T instance, ICallRecorder recorder);
-    }
+    T AddRecorder<T>(T instance);
+    T AttachRecorder<T>(T instance, ICallRecorder recorder);
 }

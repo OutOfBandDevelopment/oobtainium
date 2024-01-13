@@ -1,10 +1,9 @@
 ﻿using System;
 using static System.AttributeTargets;
 
-namespace OoBDev.Oobtainium.Recording
+namespace OoBDev.Oobtainium.Recording;
+
+[AttributeUsage(Class | Interface | Method | Property, Inherited = true)]
+public class ExcludeFromRecordingAttribute : Attribute
 {
-    [AttributeUsage(Class | Interface | Method | Property, Inherited = true)]
-    public class ExcludeFromRecordingAttribute : Attribute
-    {
-    }
 }

@@ -4,41 +4,40 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace OoBDev.Oobtainium.Tests.ProofOfConcepts
+namespace OoBDev.Oobtainium.Tests.ProofOfConcepts;
+
+[TestClass]
+public class TypeDescriptorManipulation
 {
-    [TestClass]
-    public class TypeDescriptorManipulation
+    public TestContext TestContext { get; set; }
+
+    [TestMethod, TestCategory(TestCategories.PoC)]
+    [TestCategory(TestCategories.Feature.Reflection)]
+    public void Get_Dynamically_Added_Attributes()
     {
-        public TestContext TestContext { get; set; }
+        var target = typeof(ITargetInterface);
 
-        [TestMethod, TestCategory(TestCategories.PoC)]
-        [TestCategory(TestCategories.Feature.Reflection)]
-        public void Get_Dynamically_Added_Attributes()
-        {
-            var target = typeof(ITargetInterface);
+        //show attribute doesn't exist
+        var attributes = TypeDescriptor.GetAttributes(target).OfType<DisplayAttribute>();
+        Assert.IsFalse(attributes.Any());
 
-            //show attribute doesn't exist
-            var attributes = TypeDescriptor.GetAttributes(target).OfType<DisplayAttribute>();
-            Assert.IsFalse(attributes.Any());
+        // add attribute to type
+        var provider = TypeDescriptor.AddAttributes(typeof(ITargetInterface), new DisplayAttribute() { Name = "Test" });
+        TypeDescriptor.Refresh(target);
 
-            // add attribute to type
-            var provider = TypeDescriptor.AddAttributes(typeof(ITargetInterface), new DisplayAttribute() { Name = "Test" });
-            TypeDescriptor.Refresh(target);
+        //ensure attribute now exists
+        var attributes2 = TypeDescriptor.GetAttributes(target).OfType<DisplayAttribute>();
+        Assert.IsTrue(attributes2.Any());
+    }
 
-            //ensure attribute now exists
-            var attributes2 = TypeDescriptor.GetAttributes(target).OfType<DisplayAttribute>();
-            Assert.IsTrue(attributes2.Any());
-        }
+    [TestMethod, TestCategory(TestCategories.PoC)]
+    [TestCategory(TestCategories.Feature.Reflection)]
+    public void Get_Static_Attributes()
+    {
+        var target = typeof(ITargetInterface);
 
-        [TestMethod, TestCategory(TestCategories.PoC)]
-        [TestCategory(TestCategories.Feature.Reflection)]
-        public void Get_Static_Attributes()
-        {
-            var target = typeof(ITargetInterface);
+        var attributes = TypeDescriptor.GetAttributes(target).OfType<LookupAttribute>();
 
-            var attributes = TypeDescriptor.GetAttributes(target).OfType<LookupAttribute>();
-
-            Assert.IsTrue(attributes.Any());
-        }
+        Assert.IsTrue(attributes.Any());
     }
 }
