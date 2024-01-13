@@ -10,7 +10,7 @@ namespace OoBDev.Oobtainium.Reflection.Recording;
 public class CallRecorder : ICallRecorder
 {
     private readonly ILogger<ICallRecorder>? _log;
-    private readonly SynchronizedCollection<IRecordedCall> _calls = new SynchronizedCollection<IRecordedCall>();
+    private readonly SynchronizedCollection<IRecordedCall> _calls = new();
 
     public CallRecorder(ILogger<ICallRecorder>? log = null)
     {

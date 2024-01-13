@@ -19,7 +19,7 @@ public class CaptureProxy<I> : DispatchProxy, IHaveCallHandler, IHaveCallBinding
     private ILogger<I>? _logger;
 
     //TODO: this backing store should move the CallBindingStore
-    private readonly ConcurrentDictionary<string, object?> _backingStore = new ConcurrentDictionary<string, object?>();
+    private readonly ConcurrentDictionary<string, object?> _backingStore = new();
 
     protected override object? Invoke(MethodInfo targetMethod, object[] args)
     {
@@ -28,7 +28,10 @@ public class CaptureProxy<I> : DispatchProxy, IHaveCallHandler, IHaveCallBinding
         var response = _handler?.Invoke(targetMethod, args);
         var captured = response;
 
-        if (response is Task)
+        if (response is not Task)
+        {
+        }
+        else
         {
             _logger?.LogDebug($"{_handler} response is Task so await result");
             var awaited = (Task)response;

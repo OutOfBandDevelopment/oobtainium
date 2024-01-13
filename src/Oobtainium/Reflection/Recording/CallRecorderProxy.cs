@@ -10,7 +10,7 @@ public class CallRecorderProxy<T> : WrappedDispatchProxy<T>, INeedCallRecorder
 
     protected override object Invoke(MethodInfo targetMethod, object[] args)
     {
-        var response = targetMethod.Invoke(this.Instance, args);
+        var response = targetMethod.Invoke(Instance, args);
         if (targetMethod.AllowRecording())
             Recorder?.Capture(Instance, typeof(T), targetMethod, args, response);
         return response;

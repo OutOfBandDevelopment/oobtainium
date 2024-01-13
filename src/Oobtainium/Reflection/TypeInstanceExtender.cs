@@ -22,7 +22,7 @@ public static class TypeInstanceExtender
             return module;
         }
     }
-    private static ConcurrentDictionary<string, Type> _types = new ConcurrentDictionary<string, Type>();
+    private static ConcurrentDictionary<string, Type> _types = new();
     internal static Type AddInterfaceToInstanceType<T, TProxy>(object instance)
         where TProxy : DispatchProxy
     {

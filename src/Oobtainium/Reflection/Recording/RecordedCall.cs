@@ -9,11 +9,11 @@ public class RecordedCall : IRecordedCall
 {
     public RecordedCall(object instance, Type? type, MethodInfo method, object[] arguments, object? response)
     {
-        this.Instance = instance;
-        this.Type = type;
-        this.Method = method;
-        this.Arguments = arguments ?? Array.Empty<object>();
-        this.Response = response;
+        Instance = instance;
+        Type = type;
+        Method = method;
+        Arguments = arguments ?? Array.Empty<object>();
+        Response = response;
     }
 
     public object Instance { get; }

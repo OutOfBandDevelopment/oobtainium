@@ -12,7 +12,7 @@ namespace OoBDev.Oobtainium.Tests;
 [TestClass]
 public class GeneralTests
 {
-    public TestContext TestContext { get; set; }
+    public required TestContext TestContext { get; set; }
 
     [TestMethod, TestCategory(TestCategories.Unit)]
     public async Task GeneralTest()
@@ -75,14 +75,14 @@ public class GeneralTests
         instance.VoidReturnWithGenericInput(new { Other = "hello" });
 
         var another = sp.GetRequiredService<IAnotherInterface>();
-        this.TestContext.WriteLine($"{another.DoWork("hello world!")}");
-        this.TestContext.WriteLine($"{await another.DoWork2("hello world!")}");
+        TestContext.WriteLine($"{another.DoWork("hello world!")}");
+        TestContext.WriteLine($"{await another.DoWork2("hello world!")}");
 
         //retrieve call recorder
         Assert.IsTrue(instance.TryGetRecorder(out var recorder));
         //get recording from proxy instance
         foreach (var recoding in recorder)
-            this.TestContext.WriteLine(recoding?.ToString());
+            TestContext.WriteLine(recoding?.ToString());
 
         /*
             > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String ReturnValue()  => 295b1cf5-05b3-4e21-a27b-2fcb82d8ef74
@@ -161,7 +161,7 @@ public class GeneralTests
 
         //get recording from proxy instance
         foreach (var recoding in recorder)
-            this.TestContext.WriteLine(recoding?.ToString());
+            TestContext.WriteLine(recoding?.ToString());
 
         /*
         ﻿ OnAgainOffAgainTest

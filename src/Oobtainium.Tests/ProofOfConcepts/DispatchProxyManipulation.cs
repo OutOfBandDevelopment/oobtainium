@@ -11,16 +11,16 @@ namespace OoBDev.Oobtainium.Tests.ProofOfConcepts;
 [TestClass]
 public class DispatchProxyManipulation
 {
-    public TestContext TestContext { get; set; }
+    public required TestContext TestContext { get; set; }
 
     public class Proxy<T> : WrappedDispatchProxy<T>
     {
         protected override object Invoke(MethodInfo targetMethod, object[] args)
         {
             Debug.WriteLine($"\t:> {typeof(T)}::{targetMethod}");
-            if (targetMethod.DeclaringType.IsInstanceOfType(this.Instance))
+            if (targetMethod.DeclaringType.IsInstanceOfType(Instance))
             {
-                return targetMethod.Invoke(this.Instance, args);
+                return targetMethod.Invoke(Instance, args);
             }
             else
             {
@@ -40,26 +40,26 @@ public class DispatchProxyManipulation
         object proxy3 = proxy2.AddInterface<IEmptyInterface, Proxy<IEmptyInterface>>();
 
         var c1 = (IAnotherInterface)proxy3;
-        this.TestContext.WriteLine($"\"{c1.DoWork("hi!")}\"");
+        TestContext.WriteLine($"\"{c1.DoWork("hi!")}\"");
         var c2 = (ITargetInterface)proxy3;
-        this.TestContext.WriteLine($"\"{c2.ReturnValue()}\"");
+        TestContext.WriteLine($"\"{c2.ReturnValue()}\"");
         var c3 = (IEmptyInterface)proxy3;
 
         Assert.IsInstanceOfType(proxy3, typeof(ITargetInterface));
         Assert.IsInstanceOfType(proxy3, typeof(IAnotherInterface));
         Assert.IsInstanceOfType(proxy3, typeof(IEmptyInterface));
 
-        this.TestContext.WriteLine($"Triple Wrapped: {c3}");
+        TestContext.WriteLine($"Triple Wrapped: {c3}");
 
         foreach (var @interface in c3.GetType().GetInterfaces())
         {
-            this.TestContext.WriteLine($"Interface: {@interface}");
+            TestContext.WriteLine($"Interface: {@interface}");
 
             var attributes = TypeDescriptor.GetAttributes(@interface);
 
             foreach (var attribute in attributes)
             {
-                this.TestContext.WriteLine($"\tAttribute: {attribute}");
+                TestContext.WriteLine($"\tAttribute: {attribute}");
             }
         }
     }
@@ -78,24 +78,24 @@ public class DispatchProxyManipulation
         var c1 = (IAnotherInterface)proxy3;
         //this.TestContext.WriteLine($"\"{c1.DoWork("hi!")}\"");
         var c2 = (ITargetInterface)proxy3;
-        this.TestContext.WriteLine($"\"{c2.ReturnValue()}\"");
+        TestContext.WriteLine($"\"{c2.ReturnValue()}\"");
         var c3 = (IEmptyInterface)proxy3;
 
         Assert.IsInstanceOfType(proxy3, typeof(ITargetInterface));
         Assert.IsInstanceOfType(proxy3, typeof(IAnotherInterface));
         Assert.IsInstanceOfType(proxy3, typeof(IEmptyInterface));
 
-        this.TestContext.WriteLine($"Triple Wrapped: {c3}");
+        TestContext.WriteLine($"Triple Wrapped: {c3}");
 
         foreach (var @interface in c3.GetType().GetInterfaces())
         {
-            this.TestContext.WriteLine($"Interface: {@interface}");
+            TestContext.WriteLine($"Interface: {@interface}");
 
             var attributes = TypeDescriptor.GetAttributes(@interface);
 
             foreach (var attribute in attributes)
             {
-                this.TestContext.WriteLine($"\tAttribute: {attribute}");
+                TestContext.WriteLine($"\tAttribute: {attribute}");
             }
         }
     }

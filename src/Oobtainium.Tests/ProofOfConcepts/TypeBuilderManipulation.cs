@@ -9,7 +9,7 @@ namespace OoBDev.Oobtainium.Tests.ProofOfConcepts;
 [TestClass]
 public class TypeBuilderManipulation
 {
-    public TestContext TestContext { get; set; }
+    public required TestContext TestContext { get; set; }
 
     [TestMethod, TestCategory(TestCategories.PoC)]
     [TestCategory(TestCategories.Feature.Reflection)]

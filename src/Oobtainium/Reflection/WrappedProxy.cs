@@ -4,7 +4,7 @@ namespace OoBDev.Oobtainium.Reflection;
 
 public abstract class WrappedDispatchProxy : DispatchProxy, INeedInstance
 {
-    public object Instance { get; set; }
+    public required object Instance { get; set; }
 }
 public abstract class WrappedDispatchProxy<T> : WrappedDispatchProxy
 {

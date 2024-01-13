@@ -27,7 +27,7 @@ public static class CallBindingStoreExtensions
 }
 public class CallBindingStore : ICallBindingStore
 {
-    private readonly ConcurrentDictionary<(Type? type, MethodInfo method), Delegate> _store = new ConcurrentDictionary<(Type?, MethodInfo), Delegate>();
+    private readonly ConcurrentDictionary<(Type? type, MethodInfo method), Delegate> _store = new();
 
     public void Add(Type? type, MethodInfo? method, Delegate? callback)
     {
