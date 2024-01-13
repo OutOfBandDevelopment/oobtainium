@@ -9,4 +9,9 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="OoBDev.Oobtainium" />
+    <InternalsVisibleTo Include="OoBDev.Oobtainium.Tests" />
+  </ItemGroup>
+
 </Project>
