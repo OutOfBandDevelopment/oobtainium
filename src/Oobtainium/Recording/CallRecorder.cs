@@ -5,29 +5,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace OoBDev.Oobtainium.Recording;
-
-public class CallRecorder : ICallRecorder
+namespace OoBDev.Oobtainium.Recording
 {
-    private readonly ILogger<ICallRecorder>? _log;
-    private readonly SynchronizedCollection<IRecordedCall> _calls = new SynchronizedCollection<IRecordedCall>();
-
-    public CallRecorder(ILogger<ICallRecorder>? log = null)
+    public class CallRecorder : ICallRecorder
     {
-        _log = log;
-        Capture = RecordCall;
-    }
+        private readonly ILogger<ICallRecorder>? _log;
+        private readonly SynchronizedCollection<IRecordedCall> _calls = new SynchronizedCollection<IRecordedCall>();
 
-    public CaptureHandler Capture { get; }
+        public CallRecorder(ILogger<ICallRecorder>? log = null)
+        {
+            _log = log;
+            Capture = RecordCall;
+        }
 
-    public void Clear() => _calls.Clear();
+        public CaptureHandler Capture { get; }
 
-    public IEnumerator<IRecordedCall> GetEnumerator() => _calls.GetEnumerator();
-    IEnumerator IEnumerable.GetEnumerator() => _calls.GetEnumerator();
+        public void Clear() => _calls.Clear();
 
-    private void RecordCall(object instance, Type instanceAs, MethodInfo method, object[] arguments, object? response)
-    {
-        _log?.LogDebug($"{instance} as {instanceAs}: {method.Name}({string.Join(';', arguments.Select(i => i))}) => {response}");
-        _calls.Add(new RecordedCall(instance, instanceAs, method, arguments, response));
+        public IEnumerator<IRecordedCall> GetEnumerator() => _calls.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => _calls.GetEnumerator();
+
+        private void RecordCall(object instance, Type instanceAs, MethodInfo method, object[] arguments, object? response)
+        {
+            _log?.LogDebug($"{instance} as {instanceAs}: {method.Name}({string.Join(';', arguments.Select(i => i))}) => {response}");
+            _calls.Add(new RecordedCall(instance, instanceAs, method, arguments, response));
+        }
     }
 }

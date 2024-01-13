@@ -1,7 +1,8 @@
-﻿namespace OoBDev.Oobtainium.Recording;
-
-[ExcludeFromRecording]
-public interface IHaveCallRecorder
+﻿namespace OoBDev.Oobtainium.Recording
 {
-    ICallRecorder Recorder { get; }
+    [ExcludeFromRecording]
+    public interface IHaveCallRecorder
+    {
+        ICallRecorder Recorder { get; }
+    }
 }

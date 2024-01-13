@@ -1,5 +1,6 @@
-﻿namespace OoBDev.Oobtainium.Tests.TestTargets;
-
-public interface IEmptyInterface
+﻿namespace OoBDev.Oobtainium.Tests.TestTargets
 {
+    public interface IEmptyInterface
+    {
+    }
 }

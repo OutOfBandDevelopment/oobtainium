@@ -1,9 +1,10 @@
 ﻿using OoBDev.Oobtainium.Recording;
 
-namespace OoBDev.Oobtainium;
-
-[ExcludeFromRecording]
-public interface IHaveCallBindingStore
+namespace OoBDev.Oobtainium
 {
-    ICallBindingStore Store { get; }
+    [ExcludeFromRecording]
+    public interface IHaveCallBindingStore
+    {
+        ICallBindingStore Store { get; }
+    }
 }

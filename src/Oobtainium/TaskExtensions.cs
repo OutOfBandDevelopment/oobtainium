@@ -2,35 +2,36 @@
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace OoBDev.Oobtainium;
-
-public static class TaskExtensions
+namespace OoBDev.Oobtainium
 {
-    public static Task AsTask(this object? input)
+    public static class TaskExtensions
     {
-        if (input == null) return Task.CompletedTask;
-        var task = typeof(Task)
-            .GetMethod(nameof(Task.FromResult), BindingFlags.Static | BindingFlags.Public)
-            ?.MakeGenericMethod(input.GetType())
-            ?.Invoke(null, new[] { input })
-             as Task
-            ;
-        if (task == null) return Task.FromException(new NullReferenceException("Unable to resolve Task.FromResult<>()"));
-        return task;
-    }
-
-    public static object? GetResultOrDefault(this Task? task)
-    {
-        if (task != null)
+        public static Task AsTask(this object? input)
         {
-            task.GetAwaiter().GetResult();
-            var taskType = task.GetType();
-            if (taskType.IsGenericType)
-            {
-                var result = taskType.GetProperty("Result")?.GetValue(task, null);
-                return result;
-            }
+            if (input == null) return Task.CompletedTask;
+            var task = typeof(Task)
+                .GetMethod(nameof(Task.FromResult), BindingFlags.Static | BindingFlags.Public)
+                ?.MakeGenericMethod(input.GetType())
+                ?.Invoke(null, new[] { input })
+                 as Task
+                ;
+            if (task == null) return Task.FromException(new NullReferenceException("Unable to resolve Task.FromResult<>()"));
+            return task;
         }
-        return null;
+
+        public static object? GetResultOrDefault(this Task? task)
+        {
+            if (task != null)
+            {
+                task.GetAwaiter().GetResult();
+                var taskType = task.GetType();
+                if (taskType.IsGenericType)
+                {
+                    var result = taskType.GetProperty("Result")?.GetValue(task, null);
+                    return result;
+                }
+            }
+            return null;
+        }
     }
 }

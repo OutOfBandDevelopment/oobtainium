@@ -1,7 +1,8 @@
-﻿namespace OoBDev.Oobtainium.Reflection;
-
-[GeneratedInterface]
-public interface INeedInstance : IHaveInstance
+﻿namespace OoBDev.Oobtainium.Reflection
 {
-    object Instance { set; }
+    [GeneratedInterface]
+    public interface INeedInstance : IHaveInstance
+    {
+        object Instance { set; }
+    }
 }

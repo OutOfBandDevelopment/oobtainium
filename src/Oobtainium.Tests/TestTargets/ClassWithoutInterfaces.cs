@@ -1,8 +1,9 @@
-﻿namespace OoBDev.Oobtainium.Tests.TestTargets;
-
-public class ClassWithoutInterfaces
+﻿namespace OoBDev.Oobtainium.Tests.TestTargets
 {
-    public void ClassAction()
+    public class ClassWithoutInterfaces
     {
+        public void ClassAction()
+        {
+        }
     }
 }

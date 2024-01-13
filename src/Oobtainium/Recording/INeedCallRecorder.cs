@@ -1,6 +1,7 @@
-﻿namespace OoBDev.Oobtainium.Recording;
-
-internal interface INeedCallRecorder : IHaveCallRecorder
+﻿namespace OoBDev.Oobtainium.Recording
 {
-    new ICallRecorder Recorder { set; }
+    internal interface INeedCallRecorder : IHaveCallRecorder
+    {
+        new ICallRecorder Recorder { set; }
+    }
 }

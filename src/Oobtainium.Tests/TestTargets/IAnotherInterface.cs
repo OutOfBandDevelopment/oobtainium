@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
 
-namespace OoBDev.Oobtainium.Tests.TestTargets;
-
-public interface IAnotherInterface
+namespace OoBDev.Oobtainium.Tests.TestTargets
 {
-    int DoWork(string abc);
+    public interface IAnotherInterface
+    {
+        int DoWork(string abc);
 
-    Task<int> DoWork2(string abc);
+        Task<int> DoWork2(string abc);
+    }
 }
