@@ -13,9 +13,5 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     <PackageReference Include="System.ServiceModel.Primitives" Version="8.0.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <InternalsVisibleTo Include="OoBDev.Oobtainium.Tests" />
-  </ItemGroup>
   
 </Project>

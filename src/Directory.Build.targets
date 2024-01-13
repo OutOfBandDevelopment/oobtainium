@@ -5,4 +5,21 @@
       <PackagePath/>
     </None>
   </ItemGroup>
+
+  <Target Name="DeepClean">
+    <Message Text="===== Really cleaning project: $(Configuration) - &quot;$(MSBuildProjectName)&quot;"  Importance="high"/>
+    <RemoveDir Directories="$(BaseIntermediateOutputPath)" ContinueOnError="true" />
+    <MakeDir Directories="$(BaseIntermediateOutputPath)" ContinueOnError="true" />
+    <RemoveDir Directories="$(BaseOutputPath)" ContinueOnError="true" />
+    <MakeDir Directories="$(BaseOutputPath)" ContinueOnError="true" />
+  </Target>
+
+  <Target Name="GetDocumentation" Condition="'@(CodeDocumentation)' != ''">
+    <!--AfterTargets="PostBuildEvent"-->
+    <Message Text="===== Get Documentation: $(Configuration) - &quot;$(MSBuildProjectName)&quot;"  Importance="high"/>
+    <RemoveDir Directories="$(CodeDocumentPath)$(MSBuildProjectName)" ContinueOnError="true" />
+    <Message Text="CodeDocumentation: @(CodeDocumentation) -> $(CodeDocumentPath)$(MSBuildProjectName)"  Importance="high"/>
+    <Copy SourceFiles="@(CodeDocumentation)" DestinationFolder="$(CodeDocumentPath)$(MSBuildProjectName)" />
+  </Target>
+
 </Project>

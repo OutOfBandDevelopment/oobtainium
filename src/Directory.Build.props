@@ -1,14 +1,80 @@
 <Project>
   <PropertyGroup>
     <Company>Out-of-Band Development, LLC</Company>
-    <Copyright>$(Company) 2021</Copyright>
+    <Copyright>$(Company) $([System.DateTime]::Now.ToString('yyyy'))</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/OutOfBandDevelopment/oobtainium/</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <Authors>Matthew Whited</Authors>
-
+    
     <RootNamespace>OoBDev.$(MSBuildProjectName.Replace(" ", "_").Replace(".Abstractions", ""))</RootNamespace>
     <AssemblyName>OoBDev.$(MSBuildProjectName)</AssemblyName>
+    
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <ImplicitUsings>false</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsAbstractionProject>$(MSBuildProjectName.EndsWith('.Abstractions'))</IsAbstractionProject>
+    <IsTestProject>$(MSBuildProjectName.EndsWith('.Tests'))</IsTestProject>
+    <IsDatabaseProject>$(MSBuildProjectName.EndsWith('.Database'))</IsDatabaseProject>
+
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsTestProject)'!='True'">
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(LOCAL_NUGET)' != ''">
+    <PackageOutputPath>$(LOCAL_NUGET.Trim('\'))\</PackageOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(DOCUMENT_PATH)' != ''">
+    <DocumentPath>$(DOCUMENT_PATH.Trim('\'))\</DocumentPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(DOCUMENT_PATH)' == ''">
+    <DocumentPath>$(SolutionDir)docs\</DocumentPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(CodeDocumentPath)' == ''">
+    <CodeDocumentPath>$(DocumentPath)code\</CodeDocumentPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GitVersion.MsBuild" Version="5.12.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <CodeDocumentation Include="**\*.md" />
+    <CodeDocumentation Include="**\*.plantuml" />
+    <CodeDocumentation Include="**\*.puml" />
+    <CodeDocumentation Remove="bin\**\*.*" />
+    <CodeDocumentation Remove="obj\**\*.*" />
+
+    <Examples Include="**\*.txt" />
+    <Examples Include="**\*.json" />
+    <Examples Include="**\*.html" />
+    <Examples Include="**\*.csv" />
+    <Examples Include="**\*.sql" />
+    <Examples Include="**\*.xml" />
+    <Examples Remove="bin\**\*.*" />
+    <Examples Remove="obj\**\*.*" />
+
+    <Content Include="@(CodeDocumentation)" />
+    <EmbeddedResource Include="@(Examples)" />
+
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IsAbstractionProject)'=='True'">
+    <InternalsVisibleTo Include="$(RootNamespace)" />
+    <InternalsVisibleTo Include="$(RootNamespace).Tests" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(IsTestProject)'=='True'">
+  </ItemGroup>
+  <ItemGroup Condition="'$(IsAbstractionProject)'!='True' and '$(IsTestProject)'!='True'">
+    <InternalsVisibleTo Include="$(RootNamespace).Tests" />
+  </ItemGroup>
   
 </Project>
