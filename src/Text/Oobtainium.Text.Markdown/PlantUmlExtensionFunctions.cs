@@ -1,6 +1,6 @@
 ﻿using Markdig;
 
-namespace BinaryDataDecoders.Text.Markdown;
+namespace OoBDev.Oobtainium.Text.Markdown;
 
 /// <summary>
 /// Add a extension method to add the extension to the pipeline

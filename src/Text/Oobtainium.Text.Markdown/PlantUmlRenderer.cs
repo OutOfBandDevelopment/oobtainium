@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Linq;
 
-namespace BinaryDataDecoders.Text.Markdown;
+namespace OoBDev.Oobtainium.Text.Markdown;
 
 public class PlantUmlRenderer
 {
@@ -16,14 +16,14 @@ public class PlantUmlRenderer
 
     public PlantUmlRenderer(MarkdownPipeline pipeline)
     {
-        var renderFactory = new PlantUml.Net.RendererFactory();
-        _render = renderFactory.CreateRenderer(new PlantUml.Net.PlantUmlSettings
+        var renderFactory = new RendererFactory();
+        _render = renderFactory.CreateRenderer(new PlantUmlSettings
         {
             RemoteUrl = "https://www.plantuml.com/plantuml/", //TODO: expose these are configurable
-            RenderingMode = RenderingMode.Remote,                 
+            RenderingMode = RenderingMode.Remote,
         });
 
-        this._pipeline = pipeline;
+        _pipeline = pipeline;
     }
 
     public void Write(HtmlRenderer renderer, string script)

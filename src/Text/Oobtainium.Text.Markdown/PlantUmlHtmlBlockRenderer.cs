@@ -2,7 +2,7 @@
 using Markdig.Renderers;
 using Markdig.Renderers.Html;
 
-namespace BinaryDataDecoders.Text.Markdown;
+namespace OoBDev.Oobtainium.Text.Markdown;
 
 public class PlantUmlHtmlBlockRenderer(MarkdownPipeline pipeline) : HtmlObjectRenderer<PlantUmlBlock>
 {

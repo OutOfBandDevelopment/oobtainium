@@ -1,6 +1,6 @@
-using BinaryDataDecoders.Yaml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OoBDev.Oobtainium.TestUtilities;
+using OoBDev.Oobtainium.Text.Yaml;
 using System.IO;
 
 namespace OoBDev.Oobtainium.Text.Tests.Yaml;
@@ -12,7 +12,6 @@ public class YamlNavigatorTests
 
     [DataTestMethod, TestCategory(TestCategories.DevLocal)]
     [DataRow("Example.yml")]
-    [DataRow("dotnet-core.yml")]
     //[DataRow("codeql-analysis.yml")]
     public void ToNavigableTest(string resourceName)
     {

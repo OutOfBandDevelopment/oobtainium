@@ -1,7 +1,7 @@
 ﻿using Markdig;
 using Markdig.Renderers.Normalize;
 
-namespace BinaryDataDecoders.Text.Markdown;
+namespace OoBDev.Oobtainium.Text.Markdown;
 
 public class PlantUmlGithubMarkdownBlockRenderer(MarkdownPipeline pipeline) : NormalizeObjectRenderer<PlantUmlBlock>
 {

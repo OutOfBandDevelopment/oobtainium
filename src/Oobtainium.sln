@@ -75,6 +75,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oobtainium.Text.Tests", "Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oobtainium.Text.Yaml", "Text\Oobtainium.Text.Yaml\Oobtainium.Text.Yaml.csproj", "{A72E2E98-0EDF-46E2-9C59-8BA3BB86705C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oobtainium.Text.Html", "Text\Oobtainium.Text.Html\Oobtainium.Text.Html.csproj", "{9833D7EB-91A3-44C9-BCA2-91ACF3E29A48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{A72E2E98-0EDF-46E2-9C59-8BA3BB86705C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A72E2E98-0EDF-46E2-9C59-8BA3BB86705C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A72E2E98-0EDF-46E2-9C59-8BA3BB86705C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9833D7EB-91A3-44C9-BCA2-91ACF3E29A48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9833D7EB-91A3-44C9-BCA2-91ACF3E29A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9833D7EB-91A3-44C9-BCA2-91ACF3E29A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9833D7EB-91A3-44C9-BCA2-91ACF3E29A48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,6 +196,7 @@ Global
 		{9856EEC2-58F1-437C-A4D9-4F2176BA68A4} = {DEE4E00E-3B2D-4515-96AB-66F3682007D7}
 		{8659897A-CEC8-4700-B6A0-44838A0E9418} = {DEE4E00E-3B2D-4515-96AB-66F3682007D7}
 		{A72E2E98-0EDF-46E2-9C59-8BA3BB86705C} = {DEE4E00E-3B2D-4515-96AB-66F3682007D7}
+		{9833D7EB-91A3-44C9-BCA2-91ACF3E29A48} = {DEE4E00E-3B2D-4515-96AB-66F3682007D7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8DE4B6AF-2D2C-4FF7-947D-2094D4EFA4FB}

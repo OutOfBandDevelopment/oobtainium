@@ -5,7 +5,7 @@ using OoBDev.Oobtainium.Text.Json.JsonPath.Parser;
 using OoBDev.Oobtainium.Xml.XPath;
 using System;
 
-namespace OoBDev.Oobtainium.Tests.Test.Json.JsonPath.Parser;
+namespace OoBDev.Oobtainium.Tests.Text.Json.JsonPath.Parser;
 
 [TestClass]
 public class JsonPathFactoryTests

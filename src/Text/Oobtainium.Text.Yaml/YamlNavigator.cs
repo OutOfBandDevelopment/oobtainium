@@ -5,7 +5,7 @@ using System.Linq;
 using System.Xml.XPath;
 using YamlDotNet.RepresentationModel;
 
-namespace BinaryDataDecoders.Yaml;
+namespace OoBDev.Oobtainium.Text.Yaml;
 
 [FileExtension(".yaml")]
 [FileExtension(".yml")]

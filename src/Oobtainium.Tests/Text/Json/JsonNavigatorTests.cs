@@ -3,7 +3,7 @@ using OoBDev.Oobtainium.TestUtilities;
 using OoBDev.Oobtainium.Text.Json;
 using System.Text.Json;
 
-namespace OoBDev.Oobtainium.Tests.Test.Json;
+namespace OoBDev.Oobtainium.Tests.Text.Json;
 
 [TestClass]
 public class JsonNavigatorTests

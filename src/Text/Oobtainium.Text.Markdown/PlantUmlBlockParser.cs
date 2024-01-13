@@ -2,7 +2,7 @@
 using Markdig.Parsers;
 using Markdig.Syntax;
 
-namespace BinaryDataDecoders.Text.Markdown;
+namespace OoBDev.Oobtainium.Text.Markdown;
 
 public class PlantUmlBlockParser : FencedBlockParserBase<PlantUmlBlock>
 {
