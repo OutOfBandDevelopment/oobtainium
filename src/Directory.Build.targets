@@ -1,6 +1,10 @@
 <Project>
   <ItemGroup>
-    <None Include="..\..\LICENSE">
+    <None Include="..\..\LICENSE" Condition="EXISTS('..\..\LICENSE')">
+      <Pack>True</Pack>
+      <PackagePath/>
+    </None>
+    <None Include="..\..\..\LICENSE" Condition="EXISTS('..\..\..\LICENSE')">
       <Pack>True</Pack>
       <PackagePath/>
     </None>
