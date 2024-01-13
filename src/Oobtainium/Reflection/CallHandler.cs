@@ -13,9 +13,16 @@ public class CallHandler : ICallHandler
 
     private object? Invocation(Type? type, MethodInfo? method, object[]? arguments)
     {
-        if (method == null) return null;
+        if (method == null)
+        {
+            return null;
+        }
+
         var @delegate = Store[type, method];
-        if (@delegate == null) return null;
+        if (@delegate == null)
+        {
+            return null;
+        }
 
         var parameters = @delegate.Method.GetParameters();
 
@@ -37,14 +44,9 @@ public class CallHandler : ICallHandler
         var argLength = arguments?.Length ?? 0;
         for (var index = 0; index < parameters.Length; index++)
         {
-            if (index < argLength && arguments?[index] != null && parameters[index].ParameterType.IsInstanceOfType(arguments[index]))
-            {
-                args[index] = arguments[index];
-            }
-            else
-            {
-                args[index] = parameters[index].ParameterType?.GetDefaultValue();
-            }
+            args[index] = index < argLength && arguments?[index] != null && parameters[index].ParameterType.IsInstanceOfType(arguments[index])
+                ? arguments[index]
+                : (parameters[index].ParameterType?.GetDefaultValue());
         }
         return args;
     }

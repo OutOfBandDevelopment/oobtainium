@@ -7,10 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oobtainium.Abstractions", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oobtainium", "Oobtainium\Oobtainium.csproj", "{7A30D0B5-F852-4312-ABEF-E584E346CA4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oobtainium.Tests", "Oobtainium.Tests\Oobtainium.Tests.csproj", "{266C5E50-975C-493E-B5B5-A0868046AF6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oobtainium.Tests", "Oobtainium.Tests\Oobtainium.Tests.csproj", "{266C5E50-975C-493E-B5B5-A0868046AF6A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "parent", "parent", "{6727DC89-E340-4610-B4EE-3446461C616A}"
 	ProjectSection(SolutionItems) = preProject
+		..\.gitattributes = ..\.gitattributes
 		..\.gitignore = ..\.gitignore
 		..\GitVersion.yml = ..\GitVersion.yml
 		..\LICENSE = ..\LICENSE

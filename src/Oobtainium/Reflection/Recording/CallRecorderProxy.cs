@@ -12,7 +12,10 @@ public class CallRecorderProxy<T> : WrappedDispatchProxy<T>, INeedCallRecorder
     {
         var response = targetMethod.Invoke(Instance, args);
         if (targetMethod.AllowRecording())
+        {
             Recorder?.Capture(Instance, typeof(T), targetMethod, args, response);
+        }
+
         return response;
     }
 }

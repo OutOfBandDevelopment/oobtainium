@@ -64,7 +64,10 @@ public static class TypeInstanceExtender
     internal static T AddInterface<T, TProxy>(this object existing)
         where TProxy : WrappedDispatchProxy<T>
     {
-        if (!typeof(T).IsInterface) throw new NotSupportedException($"<T> must be an interface ({typeof(T)})");
+        if (!typeof(T).IsInterface)
+        {
+            throw new NotSupportedException($"<T> must be an interface ({typeof(T)})");
+        }
 
         //stack type here
         var type = AddInterfaceToInstanceType<T, TProxy>(existing);

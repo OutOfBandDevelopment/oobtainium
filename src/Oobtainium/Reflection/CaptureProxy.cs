@@ -100,14 +100,7 @@ public class CaptureProxy<I> : DispatchProxy, IHaveCallHandler, IHaveCallBinding
                 var taskReturnType = taskType.GetGenericArguments()[0];
                 if (taskReturnType == typeof(string) && !(captured is string))
                 {
-                    if (captured is byte[])
-                    {
-                        captured = Convert.ToBase64String((byte[])captured);
-                    }
-                    else
-                    {
-                        captured = captured?.ToString();
-                    }
+                    captured = captured is byte[] v ? Convert.ToBase64String(v) : (object?)(captured?.ToString());
                 }
                 else if (!taskReturnType.IsInstanceOfType(captured))
                 {

@@ -15,7 +15,7 @@ public class TypeBuilderManipulation
     [TestCategory(TestCategories.Feature.Reflection)]
     public void Add_Interface_To_Existing_Type()
     {
-        var existingType =typeof(ClassWithoutInterfaces);
+        var existingType = typeof(ClassWithoutInterfaces);
         var interfaceToAdd = typeof(IEmptyInterface);
 
         // https://blog.wedport.co.uk/2020/06/10/generating-c-net-core-classes-at-runtime/

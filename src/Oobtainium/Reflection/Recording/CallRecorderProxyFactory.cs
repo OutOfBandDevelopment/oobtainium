@@ -30,7 +30,11 @@ public class CallRecorderProxyFactory : ICallRecorderProxyFactory
         ILogger<T>? log = null
         )
     {
-        if (instance == null) throw new ArgumentNullException(nameof(instance));
+        if (instance == null)
+        {
+            throw new ArgumentNullException(nameof(instance));
+        }
+
         if (instance is INeedCallRecorder need)
         {
             log?.LogDebug($"Adding recorder to {instance}");

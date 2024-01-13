@@ -82,7 +82,9 @@ public class GeneralTests
         Assert.IsTrue(instance.TryGetRecorder(out var recorder));
         //get recording from proxy instance
         foreach (var recoding in recorder)
+        {
             TestContext.WriteLine(recoding?.ToString());
+        }
 
         /*
             > OoBDev.Oobtainium.Tests.TestTargets.ITargetInterface::System.String ReturnValue()  => 295b1cf5-05b3-4e21-a27b-2fcb82d8ef74
@@ -161,7 +163,9 @@ public class GeneralTests
 
         //get recording from proxy instance
         foreach (var recoding in recorder)
+        {
             TestContext.WriteLine(recoding?.ToString());
+        }
 
         /*
         ﻿ OnAgainOffAgainTest

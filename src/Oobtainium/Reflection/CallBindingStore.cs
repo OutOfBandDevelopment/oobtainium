@@ -31,27 +31,47 @@ public class CallBindingStore : ICallBindingStore
 
     public void Add(Type? type, MethodInfo? method, Delegate? callback)
     {
-        if (method == null || callback == null) return;
+        if (method == null || callback == null)
+        {
+            return;
+        }
+
         _store.AddOrUpdate((type ?? method.DeclaringType, method), key => callback, (key, old) => callback);
     }
 
     public void Remove(MethodInfo? method)
     {
-        if (method == null) return;
+        if (method == null)
+        {
+            return;
+        }
+
         var selectedKeys = _store.Keys.Where(k => k.method == method).ToArray();
         foreach (var key in selectedKeys)
+        {
             _store.TryRemove(key, out _);
+        }
     }
     public void Remove(Type? type)
     {
-        if (type == null) return;
+        if (type == null)
+        {
+            return;
+        }
+
         var selectedKeys = _store.Keys.Where(k => k.type == type).ToArray();
         foreach (var key in selectedKeys)
+        {
             _store.TryRemove(key, out _);
+        }
     }
     public void Remove(Type? type, MethodInfo? method)
     {
-        if (method == null) return;
+        if (method == null)
+        {
+            return;
+        }
+
         _store.TryRemove((type, method), out _);
     }
 
