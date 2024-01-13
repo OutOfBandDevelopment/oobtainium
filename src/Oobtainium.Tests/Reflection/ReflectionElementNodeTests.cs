@@ -1,4 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using OoBDev.Oobtainium.IO;
+using OoBDev.Oobtainium.Reflection;
+using OoBDev.Oobtainium.TestUtilities;
+using OoBDev.Oobtainium.Xml.XPath;
 using System;
 
 namespace OoBDev.Oobtainium.Tests.Reflection;

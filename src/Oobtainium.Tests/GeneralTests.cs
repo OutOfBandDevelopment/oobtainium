@@ -6,6 +6,7 @@ using OoBDev.Oobtainium.Reflection;
 using OoBDev.Oobtainium.Tests.TestTargets;
 using System;
 using System.Threading.Tasks;
+using OoBDev.Oobtainium.TestUtilities;
 
 namespace OoBDev.Oobtainium.Tests;
 

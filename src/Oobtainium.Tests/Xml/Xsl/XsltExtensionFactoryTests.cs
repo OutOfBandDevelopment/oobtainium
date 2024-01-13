@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OoBDev.Oobtainium.TestUtilities;
+using OoBDev.Oobtainium.Xml.Xsl;
 using System.Diagnostics;
 using System.Reflection;
 

@@ -2,6 +2,7 @@
 using OoBDev.Oobtainium.ComponentModel;
 using OoBDev.Oobtainium.Reflection;
 using OoBDev.Oobtainium.Tests.TestTargets;
+using OoBDev.Oobtainium.TestUtilities;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OoBDev.Oobtainium.Tests.TestTargets;
+using OoBDev.Oobtainium.TestUtilities;
 using System;
 using System.Reflection;
 using System.Reflection.Emit;

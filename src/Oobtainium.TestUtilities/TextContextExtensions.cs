@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using OoBDev.Oobtainium.Xml.XPath;
 using System;
 using System.IO;
 using System.Linq;

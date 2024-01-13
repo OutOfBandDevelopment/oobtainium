@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OoBDev.Oobtainium.TestUtilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ public class MemoryExTests
     public void SplitTest_Exclude()
     {
         var data = GetTestData();
-        var segments = data.Split(0x08, Exclude);
+        var segments = data.Split(0x08, DelimiterOptions.Exclude);
 
         CheckResults(segments,
             [0, 1, 2, 3, 4, 5, 6, 7,],
@@ -27,7 +28,7 @@ public class MemoryExTests
     public void SplitTest_Carry()
     {
         var data = GetTestData();
-        var segments = data.Split(0x08, Carry);
+        var segments = data.Split(0x08, DelimiterOptions.Carry);
 
         CheckResults(segments,
             [0, 1, 2, 3, 4, 5, 6, 7,],
@@ -40,7 +41,7 @@ public class MemoryExTests
     public void SplitTest_Return()
     {
         var data = GetTestData();
-        var segments = data.Split(0x08, Return);
+        var segments = data.Split(0x08, DelimiterOptions.Return);
 
         CheckResults(segments,
             [0, 1, 2, 3, 4, 5, 6, 7, 8,],
@@ -53,7 +54,7 @@ public class MemoryExTests
     public void SplitTest_Exclude3()
     {
         var data = GetBigTestData();
-        var segments = data.Split(0x08, Exclude);
+        var segments = data.Split(0x08, DelimiterOptions.Exclude);
 
         CheckResults(segments,
             [0, 1, 2, 3, 4, 5, 6, 7,],

@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OoBDev.Oobtainium.Codecs;
+using OoBDev.Oobtainium.TestUtilities;
 using System.Text;
 
 namespace OoBDev.Oobtainium.Tests.Codecs;

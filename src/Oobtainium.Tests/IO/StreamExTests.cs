@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OoBDev.Oobtainium.IO;
+using OoBDev.Oobtainium.TestUtilities;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;

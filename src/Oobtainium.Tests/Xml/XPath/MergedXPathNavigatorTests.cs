@@ -1,4 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OoBDev.Oobtainium.IO;
+using OoBDev.Oobtainium.TestUtilities;
+using OoBDev.Oobtainium.Xml.XPath;
 using System.IO;
 using System.Xml.Linq;
 using System.Xml.XPath;
