@@ -8,7 +8,7 @@ using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
 
-namespace BinaryDataDecoders.Templating.Html.Tests;
+namespace OoBDev.Oobtainium.Text.Tests.Html;
 
 [TestClass]
 public class HtmlTests
@@ -39,7 +39,7 @@ public class HtmlTests
 
         xslt.Transform(nav, xsltArgumentList, resultStream);
 
-        this.TestContext.AddResult(resultStream, "TestResult.html");
+        TestContext.AddResult(resultStream, "TestResult.html");
     }
 
     [TestMethod, TestCategory(TestCategories.DevLocal)]
