@@ -22,7 +22,7 @@ https://github.com/coverlet-coverage/coverlet/blob/fc7ec26dcaed8fedba880ff13c6f1
 				<Configuration>
 					<!--CompilerGeneratedAttribute,Obsolete,GeneratedCodeAttribute,-->
 					<ExcludeByAttribute>ExcludeFromCodeCoverageAttribute</ExcludeByAttribute>
-					<!--,[OoBDev.*.Abstractions?]*,[OoBDev.*.Tests?]*-->
+					<!--,[*.Abstractions?]*,[*.Tests?]*-->
 					<Exclude>[coverlet.*.tests?]*,[*]Coverlet.Core*</Exclude>
 					<!--<ExcludeByFile>**/*Registrar.cs,**/ServiceCollectionEx.cs,</ExcludeByFile>-->
 				

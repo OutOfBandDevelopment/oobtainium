@@ -1,11 +1,14 @@
 <Project>
   <PropertyGroup>
-    <Copyright>Out-of-Band Development, LLC 2021</Copyright>
     <Company>Out-of-Band Development, LLC</Company>
+    <Copyright>$(Company) 2021</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/OutOfBandDevelopment/oobtainium/</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <Authors>Matthew Whited</Authors>
+
+    <RootNamespace>OoBDev.$(MSBuildProjectName.Replace(" ", "_").Replace(".Abstractions", ""))</RootNamespace>
+    <AssemblyName>OoBDev.$(MSBuildProjectName)</AssemblyName>
   </PropertyGroup>
   
 </Project>

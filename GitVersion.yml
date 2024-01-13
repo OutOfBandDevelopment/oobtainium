@@ -1,14 +1,14 @@
-#next-version: 0.3.0
-assembly-versioning-scheme: MajorMinorPatchTag
-mode: ContinuousDeployment
-increment: Patch
+assembly-versioning-scheme: MajorMinorPatch
+assembly-file-versioning-scheme: MajorMinorPatchTag
+assembly-informational-format: '{FullSemVer}'
+mode: Mainline
 branches:
   master:
-    mode: ContinuousDeployment
-    tag: rc
+    regex: main|master
+    increment: Patch
   develop:
     mode: ContinuousDeployment
     tag: dev
+
 ignore:
   sha: []
-merge-message-formats: {}
