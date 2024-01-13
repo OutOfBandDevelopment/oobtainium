@@ -1,6 +1,6 @@
 ﻿namespace OoBDev.Oobtainium;
 
-internal static class ToolkitConstants
+public static class ToolkitConstants
 {
     public static class XmlNamespaces
     {

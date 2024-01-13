@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
+    <PackageReference Include="coverlet.collector" Version="6.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Oobtainium.TestUtilities\Oobtainium.TestUtilities.csproj" />
+	  <ProjectReference Include="..\Oobtainium.Devices.EByteElectronicTechnology\Oobtainium.Devices.EByteElectronicTechnology.csproj" />
+	  <ProjectReference Include="..\Oobtainium.Devices.ElectronicScoringMachines.Fencing\Oobtainium.Devices.ElectronicScoringMachines.Fencing.csproj" />
+	  <ProjectReference Include="..\Oobtainium.Devices.Kuando.Busylight\Oobtainium.Devices.Kuando.Busylight.csproj" />
+	  <ProjectReference Include="..\Oobtainium.Devices.LanC\Oobtainium.Devices.LanC.csproj" />
+	  <ProjectReference Include="..\Oobtainium.Devices.Nmea\Oobtainium.Devices.Nmea.csproj" />
+	  <ProjectReference Include="..\Oobtainium.Devices.Quarta.RadexOne\Oobtainium.Devices.Quarta.RadexOne.csproj" />
+	  <ProjectReference Include="..\Oobtainium.Devices.Rigol\Oobtainium.Devices.Rigol.csproj" />
+	  <ProjectReference Include="..\Oobtainium.Devices.Velleman.K8055\Oobtainium.Devices.Velleman.K8055.csproj" />
+	  <ProjectReference Include="..\Oobtainium.Devices.Zoom.H4n\Oobtainium.Devices.Zoom.H4n.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Nmea\" />
+	</ItemGroup>
+
+</Project>
