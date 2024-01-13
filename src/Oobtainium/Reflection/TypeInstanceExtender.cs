@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Threading;
 
 namespace OoBDev.Oobtainium.Reflection;
 
@@ -71,11 +72,7 @@ public static class TypeInstanceExtender
 
         //stack type here
         var type = AddInterfaceToInstanceType<T, TProxy>(existing);
-
-        var proxyType = typeof(TProxy).GetGenericTypeDefinition().MakeGenericType(type);
-        var createMethod = typeof(DispatchProxy).GetMethod(nameof(DispatchProxy.Create), BindingFlags.Static | BindingFlags.Public);
-        var genericCreateMethod = createMethod.MakeGenericMethod(type, proxyType);
-        var newProxy = genericCreateMethod.Invoke(null, null);
+        var newProxy = DispatchProxy.Create(type, typeof(TProxy));
         var wrapped = (INeedInstance)newProxy;
         wrapped.Instance = existing;
         return (T)newProxy;
