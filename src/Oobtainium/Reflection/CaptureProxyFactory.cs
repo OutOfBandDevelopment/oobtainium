@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using OoBDev.Oobtainium.Reflection.Recording;
-using OoBDev.Oobtainium.Reflection.Recording;
 using System;
 
 namespace OoBDev.Oobtainium.Reflection;

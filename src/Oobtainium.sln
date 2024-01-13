@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.targets = Directory.Build.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oobtainium.TestUtilities", "Oobtainium.TestUtilities\Oobtainium.TestUtilities.csproj", "{4F9F61F0-C005-43CA-B5BA-56801584BA47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{266C5E50-975C-493E-B5B5-A0868046AF6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{266C5E50-975C-493E-B5B5-A0868046AF6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{266C5E50-975C-493E-B5B5-A0868046AF6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F9F61F0-C005-43CA-B5BA-56801584BA47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F9F61F0-C005-43CA-B5BA-56801584BA47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F9F61F0-C005-43CA-B5BA-56801584BA47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F9F61F0-C005-43CA-B5BA-56801584BA47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
