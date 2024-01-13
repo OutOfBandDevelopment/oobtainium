@@ -1,0 +1,86 @@
+﻿using OoBDev.Oobtainium.PathSegments;
+using OoBDev.Oobtainium.Text.Json.JsonPath.Parser;
+using OoBDev.Oobtainium.Xml.XPath;
+using System;
+using System.Linq;
+using System.Text.Json;
+using System.Xml.Linq;
+using System.Xml.XPath;
+
+namespace OoBDev.Oobtainium.Text.Json;
+
+public static class JsonNavigatorFactory
+{
+    public static IPathSegment ParseAsJsonPath(this string jsonPath) => JsonPathFactory.Parse(jsonPath);
+
+    public static IXPathNavigable ToNavigable(this JsonDocument json, XName? rootName = null, string? baseUri = null) =>
+        json.RootElement.ToNavigable(rootName, baseUri);
+
+    public static IXPathNavigable ToNavigable(this JsonElement json, XName? rootName = null, string? baseUri = null) =>
+        new ExtensibleNavigator(json.AsNode(rootName, baseUri));
+
+    public static INode AsNode(this JsonDocument json, XName? rootName = null, string? baseUri = null) =>
+        json.RootElement.AsNode(rootName, baseUri);
+
+    public static INode AsNode(this JsonElement json, XName? rootName = null, string? baseUri = null)
+    {
+        if (rootName == null || string.IsNullOrWhiteSpace(rootName.LocalName))
+            rootName = XName.Get(json.ValueKind.ToString(), baseUri ?? "");
+
+        return new ExtensibleElementNode(
+            rootName,
+            json.Clone(),
+
+            valueSelector: v => v switch
+            {
+                JsonElement element => element.ValueKind switch
+                {
+                    JsonValueKind.Array => null,
+                    JsonValueKind.Object => null,
+
+                    JsonValueKind.String => element.GetString(),
+                    _ => element.GetRawText()
+                },
+
+                JsonProperty property => property.Value.ValueKind switch
+                {
+                    JsonValueKind.Array => null,
+                    JsonValueKind.Object => null,
+
+                    JsonValueKind.String => property.Value.GetString(),
+                    _ => property.Value.GetRawText()
+                },
+
+                _ => throw new NotSupportedException(),
+            },
+
+             attributeSelector: a => a switch
+             {
+                 JsonElement element => new (XName, string?)[]
+                 {
+                    (XName.Get("kind", ""), element.ValueKind.ToString()),
+
+                 }.Where(a => a.Item2 != null).AsEnumerable(),
+
+                 JsonProperty property => null,
+
+                 _ => throw new NotSupportedException(),
+             },
+
+             childSelector: c => c switch
+             {
+                 JsonElement element => element.ValueKind switch
+                 {
+                     JsonValueKind.Array => element.EnumerateArray().Select(i => (XName.Get("item", rootName.NamespaceName), (object)i)),
+                     JsonValueKind.Object => element.EnumerateObject().Select(i => (XName.Get(i.Name, rootName.NamespaceName), (object)i.Value)),
+
+                     _ => null
+                 },
+
+                 JsonProperty property => new[] { (XName.Get(property.Name, rootName.NamespaceName), (object)property.Value) }.AsEnumerable(),
+
+                 _ => throw new NotSupportedException()
+             }
+        );
+    }
+}

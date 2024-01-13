@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.targets = Directory.Build.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oobtainium.TestUtilities", "Oobtainium.TestUtilities\Oobtainium.TestUtilities.csproj", "{4F9F61F0-C005-43CA-B5BA-56801584BA47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oobtainium.TestUtilities", "Oobtainium.TestUtilities\Oobtainium.TestUtilities.csproj", "{4F9F61F0-C005-43CA-B5BA-56801584BA47}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IO", "IO", "{ACA04CBA-B315-40F1-A093-22FBD1760682}"
 EndProject
@@ -66,6 +66,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oobtainium.Devices.Zoom.H4n", "Devices\Oobtainium.Devices.Zoom.H4n\Oobtainium.Devices.Zoom.H4n.csproj", "{481B7CA6-B2A4-421B-8189-FFECD7358543}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oobtainium.Devices.Tests", "Devices\Oobtainium.Devices.Tests\Oobtainium.Devices.Tests.csproj", "{0FB11091-6260-4879-9607-D9E7EE360999}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Text", "Text", "{DEE4E00E-3B2D-4515-96AB-66F3682007D7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oobtainium.Text.Markdown", "Text\Oobtainium.Text.Markdown\Oobtainium.Text.Markdown.csproj", "{9856EEC2-58F1-437C-A4D9-4F2176BA68A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oobtainium.Text.Tests", "Text\Oobtainium.Text.Tests\Oobtainium.Text.Tests.csproj", "{8659897A-CEC8-4700-B6A0-44838A0E9418}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oobtainium.Text.Yaml", "Text\Oobtainium.Text.Yaml\Oobtainium.Text.Yaml.csproj", "{A72E2E98-0EDF-46E2-9C59-8BA3BB86705C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,6 +153,18 @@ Global
 		{0FB11091-6260-4879-9607-D9E7EE360999}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FB11091-6260-4879-9607-D9E7EE360999}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FB11091-6260-4879-9607-D9E7EE360999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9856EEC2-58F1-437C-A4D9-4F2176BA68A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9856EEC2-58F1-437C-A4D9-4F2176BA68A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9856EEC2-58F1-437C-A4D9-4F2176BA68A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9856EEC2-58F1-437C-A4D9-4F2176BA68A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8659897A-CEC8-4700-B6A0-44838A0E9418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8659897A-CEC8-4700-B6A0-44838A0E9418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8659897A-CEC8-4700-B6A0-44838A0E9418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8659897A-CEC8-4700-B6A0-44838A0E9418}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A72E2E98-0EDF-46E2-9C59-8BA3BB86705C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A72E2E98-0EDF-46E2-9C59-8BA3BB86705C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A72E2E98-0EDF-46E2-9C59-8BA3BB86705C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A72E2E98-0EDF-46E2-9C59-8BA3BB86705C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -167,6 +187,9 @@ Global
 		{A28B2229-BF7C-4351-9AA0-206A5BE2B82D} = {764A3535-6851-450B-B39D-807FA96921D1}
 		{481B7CA6-B2A4-421B-8189-FFECD7358543} = {764A3535-6851-450B-B39D-807FA96921D1}
 		{0FB11091-6260-4879-9607-D9E7EE360999} = {764A3535-6851-450B-B39D-807FA96921D1}
+		{9856EEC2-58F1-437C-A4D9-4F2176BA68A4} = {DEE4E00E-3B2D-4515-96AB-66F3682007D7}
+		{8659897A-CEC8-4700-B6A0-44838A0E9418} = {DEE4E00E-3B2D-4515-96AB-66F3682007D7}
+		{A72E2E98-0EDF-46E2-9C59-8BA3BB86705C} = {DEE4E00E-3B2D-4515-96AB-66F3682007D7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8DE4B6AF-2D2C-4FF7-947D-2094D4EFA4FB}
