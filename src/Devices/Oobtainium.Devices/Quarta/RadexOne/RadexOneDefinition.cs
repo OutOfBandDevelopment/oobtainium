@@ -3,13 +3,11 @@ using OoBDev.Oobtainium.IO.Messages;
 using OoBDev.Oobtainium.IO.Ports;
 using OoBDev.Oobtainium.IO.Segmenters;
 using System.ComponentModel;
-using System.Composition;
 
 namespace OoBDev.Oobtainium.Devices.Quarta.RadexOne;
 
 [SerialPort(9600)]
 [Description("Radex One")]
-[Export(typeof(IDeviceDefinition))]
 public class RadexOneDefinition : IDeviceDefinitionTransmitter<IRadexObject>, IDeviceDefinitionReceiver<IRadexObject>
 {
     public IMessageEncoder<IRadexObject> Encoder { get; } = new MessageEncoder<IRadexObject>();

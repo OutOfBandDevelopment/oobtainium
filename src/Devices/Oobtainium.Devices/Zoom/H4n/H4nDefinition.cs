@@ -3,7 +3,6 @@ using OoBDev.Oobtainium.IO.Messages;
 using OoBDev.Oobtainium.IO.Ports;
 using OoBDev.Oobtainium.IO.Segmenters;
 using System.ComponentModel;
-using System.Composition;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -14,7 +13,6 @@ namespace OoBDev.Oobtainium.Devices.Zoom.H4n;
 
 [SerialPort(2400)]
 [Description("Zoom H4N")]
-[Export(typeof(IDeviceDefinition))]
 public class H4nDefinition :
     IDeviceDefinitionReceiver<IH4nMessage>,
     IDeviceDefinitionTransmitter<IH4nMessage>,

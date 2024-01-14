@@ -17,15 +17,8 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Oobtainium.TestUtilities\Oobtainium.TestUtilities.csproj" />
-	  <ProjectReference Include="..\Oobtainium.Devices.EByteElectronicTechnology\Oobtainium.Devices.EByteElectronicTechnology.csproj" />
-	  <ProjectReference Include="..\Oobtainium.Devices.ElectronicScoringMachines.Fencing\Oobtainium.Devices.ElectronicScoringMachines.Fencing.csproj" />
 	  <ProjectReference Include="..\Oobtainium.Devices.Kuando.Busylight\Oobtainium.Devices.Kuando.Busylight.csproj" />
-	  <ProjectReference Include="..\Oobtainium.Devices.LanC\Oobtainium.Devices.LanC.csproj" />
-	  <ProjectReference Include="..\Oobtainium.Devices.Nmea\Oobtainium.Devices.Nmea.csproj" />
-	  <ProjectReference Include="..\Oobtainium.Devices.Quarta.RadexOne\Oobtainium.Devices.Quarta.RadexOne.csproj" />
-	  <ProjectReference Include="..\Oobtainium.Devices.Rigol\Oobtainium.Devices.Rigol.csproj" />
-	  <ProjectReference Include="..\Oobtainium.Devices.Velleman.K8055\Oobtainium.Devices.Velleman.K8055.csproj" />
-	  <ProjectReference Include="..\Oobtainium.Devices.Zoom.H4n\Oobtainium.Devices.Zoom.H4n.csproj" />
+	  <ProjectReference Include="..\Oobtainium.Devices\Oobtainium.Devices.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

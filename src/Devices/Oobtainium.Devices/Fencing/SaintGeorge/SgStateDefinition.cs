@@ -1,16 +1,15 @@
 ﻿using OoBDev.Oobtainium.Devices.ElectronicScoringMachines.Fencing.Common;
+using OoBDev.Oobtainium.Devices.ElectronicScoringMachines.Fencing.SaintGeorge;
 using OoBDev.Oobtainium.IO;
 using OoBDev.Oobtainium.IO.Messages;
 using OoBDev.Oobtainium.IO.Ports;
 using OoBDev.Oobtainium.IO.Segmenters;
 using System.ComponentModel;
-using System.Composition;
 
-namespace OoBDev.Oobtainium.Devices.ElectronicScoringMachines.Fencing.SaintGeorge;
+namespace OoBDev.Oobtainium.Devices.Fencing.SaintGeorge;
 
 [SerialPort(9600, Parity.None, 8, StopBits.One)]
 [Description("Saint George")]
-[Export(typeof(IDeviceDefinition))]
 public class SgStateDefinition : IDeviceDefinitionReceiver<IScoreMachineState>
 {
     public ISegmentBuildDefinition SegmentDefintion { get; } =
